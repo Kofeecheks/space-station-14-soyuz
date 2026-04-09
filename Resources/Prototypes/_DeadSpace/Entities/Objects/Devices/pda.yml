@@ -131,6 +131,7 @@
       - CrewManifestCartridge
       - NotekeeperCartridge
       - NewsReaderCartridge
+      - USSPChatCartridge # DS-14
       - AstroNavCartridge
 
 - type: entity
@@ -186,6 +187,7 @@
     preinstalled:
     - NotekeeperCartridge
     - NanoTaskCartridge
+    - USSPChatCartridge # DS-14
     cartridgeSlot:
       priority: -1
       name: device-pda-slot-component-slot-name-cartridge
@@ -297,6 +299,7 @@
     preinstalled:
       - NotekeeperCartridge
       - NanoTaskCartridge
+      - USSPChatCartridge # DS-14
       - MedTekCartridge
 
 - type: entity
@@ -319,6 +322,7 @@
     preinstalled:
       - NotekeeperCartridge
       - NanoTaskCartridge
+      - USSPChatCartridge # DS-14
       - MedTekCartridge
 
 - type: entity
@@ -405,4 +409,5 @@
     preinstalled:
       - NotekeeperCartridge
       - NanoTaskCartridge
+      - USSPChatCartridge # DS-14
       - AstroNavCartridge

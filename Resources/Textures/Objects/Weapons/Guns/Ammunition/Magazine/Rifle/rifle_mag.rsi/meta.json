@@ -35,8 +35,14 @@
             "name": "inhand-right-stripe",
             "directions": 4
         },
-        {
-            "name": "tungsten"
-        }
+    {
+      "name": "incendiary"
+    },
+    {
+      "name": "practice"
+    },
+    {
+      "name": "uranium"
+    }
     ]
 }

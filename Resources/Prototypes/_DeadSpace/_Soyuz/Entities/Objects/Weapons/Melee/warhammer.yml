@@ -35,8 +35,8 @@
   - type: MeleeWeapon
     damage:
       types:
-        Blunt: 15
-        Structural: 30
+        Blunt: 20
+    wideAnimationRotation: -135
   - type: Wieldable
   - type: GunRequiresWield
   - type: Item

@@ -87,6 +87,12 @@ station-event-response-team-arrival-cburn-sierra =
     Аварийно-спасательная бригада РХБЗЗ "Сьерра" прибыла в сектор станции.
     Экипажу приказывается сохранять спокойствие и доложить местонахождение действующей угрозы.
 
-station-event-response-team-arrival-uni-ops =
-    Альянс Противодействия Био-Терроризму прибыл в сектор станции.
-    Экипажу приказывается сохранять спокойствие и доложить местонахождение действующей угрозы.
+station-event-centcomm-official-arrival =
+    Внимание командованию станции! На связи Генеральный штаб!
+    Представитель Генерального Штаба прибыл в сектор станции. Ожидайте указаний по штатным каналам связи. Ave, Unionis Sovieticarum Socilistartarum Planetarum!
+
+ert-call-fail-already-waiting = Уже вызван
+ert-call-fail-prototype-missing = Отряда не доступен.
+ert-call-fail-code-blacklist = Уровень тревоги ({$level}) запрещает вызов этого отряда.
+ert-call-fail-not-enough-points = Недостаточно ресурса для вызова (нужно {$price}, доступно {$balance}).
+ert-call-fail-cooldown = Повторный вызов возможен через {$seconds} сек.

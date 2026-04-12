@@ -36,10 +36,10 @@ public sealed class SpeedSlidingSystem : EntitySystem
 
         var speed = velocity.Length();
         var direction = velocity / speed;
-        var slideImpulse = direction * (ent.Comp.SlideSpeed * ent.Comp.SlideDistance * physics.Mass);
+        var slideImpulse = direction * (slide.SlideSpeed * slide.SlideDistance * physics.Mass);
 
-        _physics.SetLinearVelocity(ent.Owner, Vector2.Zero, body: physics);
-        _physics.ApplyLinearImpulse(ent.Owner, slideImpulse, body: physics);
+        _physics.SetLinearVelocity(uid, Vector2.Zero, body: physics);
+        _physics.ApplyLinearImpulse(uid, slideImpulse, body: physics);
 
         _audio.PlayPredicted(ent.Comp.SlideSound, ent.Owner, ent.Owner);
     }

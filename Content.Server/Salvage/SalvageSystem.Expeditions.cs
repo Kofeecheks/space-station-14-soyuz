@@ -8,6 +8,7 @@ using Content.Shared.Shuttles.Components;
 using Robust.Shared.CPUJob.JobQueues;
 using Robust.Shared.CPUJob.JobQueues.Queues;
 using Robust.Shared.GameStates;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Salvage;
 
@@ -18,6 +19,9 @@ public sealed partial class SalvageSystem
      */
 
     private const int MissionLimit = 3;
+    private const string ModerateDifficultyId = "Moderate";
+    private const string OutpostDifficultyId = "Outpost";
+    private static readonly ResPath ExpeditionTemplateDirectory = new("/Maps/_Soyuz/Expeditions/");
 
     private readonly JobQueue _salvageQueue = new();
     private readonly List<(SpawnSalvageMissionJob Job, CancellationTokenSource CancelToken)> _salvageJobs = new();
@@ -141,6 +145,8 @@ public sealed partial class SalvageSystem
     private void GenerateMissions(SalvageExpeditionDataComponent component)
     {
         component.Missions.Clear();
+        var hasOutpostTemplates = _resources.ContentFindFiles(ExpeditionTemplateDirectory)
+            .Any(path => path.Extension is "yml" or "yaml");
 
         for (var i = 0; i < MissionLimit; i++)
         {
@@ -148,7 +154,7 @@ public sealed partial class SalvageSystem
             {
                 Index = component.NextIndex,
                 Seed = _random.Next(),
-                Difficulty = "Moderate",
+                Difficulty = i == 0 && hasOutpostTemplates ? OutpostDifficultyId : ModerateDifficultyId,
             };
 
             component.Missions[component.NextIndex++] = mission;
@@ -170,9 +176,11 @@ public sealed partial class SalvageSystem
             _timing,
             _logManager,
             _prototypeManager,
+            _resources,
             _anchorable,
             _biome,
             _dungeon,
+            _loader,
             _metaData,
             _mapSystem,
             station,

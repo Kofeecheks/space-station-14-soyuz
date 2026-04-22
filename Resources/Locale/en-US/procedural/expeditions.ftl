@@ -13,6 +13,7 @@ offering-window-claim = Claim
 salvage-expedition-window-next = Next offer
 
 salvage-expedition-difficulty-Moderate = Moderate
+salvage-expedition-difficulty-Outpost = Outpost
 salvage-expedition-difficulty-Hazardous = Hazardous
 salvage-expedition-difficulty-Extreme = Extreme
 

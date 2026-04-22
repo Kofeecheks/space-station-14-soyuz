@@ -6,6 +6,14 @@
   color: "#52B4E996"
   recommendedPlayers: 2
 
+- type: salvageDifficulty
+  id: Outpost
+  lootBudget: 24
+  mobBudget: 18
+  modifierBudget: 1
+  color: "#7ED95796"
+  recommendedPlayers: 1
+
     #9FED5896
     #EFB34196
     #DE3A3A96

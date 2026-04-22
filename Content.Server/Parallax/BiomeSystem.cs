@@ -146,7 +146,10 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
                 _shuttles.Disable(grid.Owner);
                 var pTransform = _physics.GetPhysicsTransform(grid.Owner);
 
-                foreach (var fixture in fixtures.Fixtures.Values)
+                // ReserveTiles -> SetTiles can rebuild fixture data for the same grid while map init is running.
+                // Snapshot first to avoid modifying the dictionary during enumeration.
+                var fixtureValues = fixtures.Fixtures.Values.ToArray();
+                foreach (var fixture in fixtureValues)
                 {
                     for (var i = 0; i < fixture.Shape.ChildCount; i++)
                     {
@@ -260,11 +263,39 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
         var targetMapUid = _mapSystem.GetMapOrInvalid(targetMap.MapId);
 
         if (!TryComp<BiomeComponent>(targetMapUid, out var biome))
-            return;
+        {
+            if (!_mapManager.TryFindGridAt(targetMap, out var gridUid, out _) ||
+                !TryComp<BiomeComponent>(gridUid, out biome))
+            {
+                if (!TryGetBiomeForMap(targetMap.MapId, out gridUid, out biome))
+                    return;
+            }
+
+            targetMapUid = gridUid;
+        }
 
         var preloadArea = new Vector2(32f, 32f);
         var targetArea = new Box2(targetMap.Position - preloadArea, targetMap.Position + preloadArea);
         Preload(targetMapUid, biome, targetArea);
+    }
+
+    private bool TryGetBiomeForMap(MapId mapId, out EntityUid biomeUid, out BiomeComponent biome)
+    {
+        biomeUid = EntityUid.Invalid;
+        biome = default!;
+        var query = EntityQueryEnumerator<BiomeComponent, TransformComponent>();
+
+        while (query.MoveNext(out var uid, out var candidate, out var xform))
+        {
+            if (xform.MapID != mapId)
+                continue;
+
+            biomeUid = uid;
+            biome = candidate;
+            return true;
+        }
+
+        return false;
     }
 
     private void OnShuttleFlatten(ref ShuttleFlattenEvent ev)
@@ -346,17 +377,23 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
         {
             if (_xformQuery.TryGetComponent(pSession.AttachedEntity, out var xform) &&
                 _handledEntities.Add(pSession.AttachedEntity.Value) &&
-                 _biomeQuery.TryGetComponent(xform.MapUid, out var biome) &&
-                biome.Enabled &&
                 CanLoad(pSession.AttachedEntity.Value))
             {
-                var worldPos = _transform.GetWorldPosition(xform);
-                AddChunksInRange(biome, worldPos);
-
-                foreach (var layer in biome.MarkerLayers)
+                if (_biomeQuery.TryGetComponent(xform.MapUid, out var biome) ||
+                    xform.GridUid != null && _biomeQuery.TryGetComponent(xform.GridUid.Value, out biome) ||
+                    TryGetBiomeForMap(xform.MapID, out _, out biome))
                 {
-                    var layerProto = ProtoManager.Index(layer);
-                    AddMarkerChunksInRange(biome, worldPos, layerProto);
+                    if (biome.Enabled)
+                    {
+                        var worldPos = _transform.GetWorldPosition(xform);
+                        AddChunksInRange(biome, worldPos);
+
+                        foreach (var layer in biome.MarkerLayers)
+                        {
+                            var layerProto = ProtoManager.Index(layer);
+                            AddMarkerChunksInRange(biome, worldPos, layerProto);
+                        }
+                    }
                 }
             }
 
@@ -364,12 +401,20 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
             {
                 if (!_handledEntities.Add(viewer) ||
                     !_xformQuery.TryGetComponent(viewer, out xform) ||
-                    !_biomeQuery.TryGetComponent(xform.MapUid, out biome) ||
-                    !biome.Enabled ||
                     !CanLoad(viewer))
                 {
                     continue;
                 }
+
+                if (!_biomeQuery.TryGetComponent(xform.MapUid, out var biome) &&
+                    !(xform.GridUid != null && _biomeQuery.TryGetComponent(xform.GridUid.Value, out biome)) &&
+                    !TryGetBiomeForMap(xform.MapID, out _, out biome))
+                {
+                    continue;
+                }
+
+                if (!biome.Enabled)
+                    continue;
 
                 var worldPos = _transform.GetWorldPosition(xform);
                 AddChunksInRange(biome, worldPos);

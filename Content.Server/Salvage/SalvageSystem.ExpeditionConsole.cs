@@ -8,6 +8,8 @@ namespace Content.Server.Salvage;
 
 public sealed partial class SalvageSystem
 {
+    private const string FallbackDifficultyId = "Moderate";
+
     public static readonly EntProtoId CoordinatesDisk = "CoordinatesDisk";
     public static readonly ProtoId<LocalizedDatasetPrototype> PlanetNames = "NamesBorer";
 
@@ -25,7 +27,14 @@ public sealed partial class SalvageSystem
         SpawnMission(missionparams, station.Value, cdUid);
 
         data.ActiveMission = args.Index;
-        var mission = GetMission(_prototypeManager.Index<SalvageDifficultyPrototype>(missionparams.Difficulty), missionparams.Seed);
+        var difficultyId = string.IsNullOrWhiteSpace(missionparams.Difficulty)
+            ? FallbackDifficultyId
+            : missionparams.Difficulty;
+
+        if (!_prototypeManager.TryIndex<SalvageDifficultyPrototype>(difficultyId, out var difficulty))
+            difficulty = _prototypeManager.Index<SalvageDifficultyPrototype>(FallbackDifficultyId);
+
+        var mission = GetMission(difficulty, missionparams.Seed);
         data.NextOffer = _timing.CurTime + mission.Duration + TimeSpan.FromSeconds(1);
 
         _labelSystem.Label(cdUid, GetFTLName(_prototypeManager.Index(PlanetNames), missionparams.Seed));

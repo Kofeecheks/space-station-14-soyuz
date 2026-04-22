@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Content.Client.Stylesheets;
 using Content.Shared.CCVar;
@@ -15,6 +16,8 @@ namespace Content.Client.Salvage.UI;
 [UsedImplicitly]
 public sealed class SalvageExpeditionConsoleBoundUserInterface : BoundUserInterface
 {
+    private const string FallbackDifficultyId = "Moderate";
+
     [ViewVariables]
     private OfferingWindow? _window;
 
@@ -59,10 +62,31 @@ public sealed class SalvageExpeditionConsoleBoundUserInterface : BoundUserInterf
             var offering = new OfferingWindowOption();
             offering.Title = Loc.GetString($"salvage-expedition-type");
 
-            var difficultyId = "Moderate";
-            var difficultyProto = _protoManager.Index<SalvageDifficultyPrototype>(difficultyId);
-            // TODO: Selectable difficulty soon.
-            var mission = salvage.GetMission(difficultyProto, missionParams.Seed);
+            var difficultyId = string.IsNullOrWhiteSpace(missionParams.Difficulty)
+                ? FallbackDifficultyId
+                : missionParams.Difficulty;
+
+            if (!_protoManager.TryIndex<SalvageDifficultyPrototype>(difficultyId, out var difficultyProto))
+            {
+                difficultyId = FallbackDifficultyId;
+
+                if (!_protoManager.TryIndex<SalvageDifficultyPrototype>(difficultyId, out difficultyProto))
+                {
+                    _sawmill.Error($"Failed to resolve salvage difficulty prototype: {missionParams.Difficulty}");
+                    continue;
+                }
+            }
+
+            SalvageMission mission;
+            try
+            {
+                mission = salvage.GetMission(difficultyProto, missionParams.Seed);
+            }
+            catch (Exception e)
+            {
+                _sawmill.Error($"Failed to build salvage mission preview for seed {missionParams.Seed} and difficulty {difficultyId}: {e}");
+                continue;
+            }
 
             // Difficulty
             // Details
@@ -75,7 +99,7 @@ public sealed class SalvageExpeditionConsoleBoundUserInterface : BoundUserInterf
 
             offering.AddContent(new Label
             {
-                Text = Loc.GetString("salvage-expedition-difficulty-Moderate"),
+                Text = Loc.GetString($"salvage-expedition-difficulty-{difficultyId}"),
                 FontColorOverride = difficultyColor,
                 HorizontalAlignment = Control.HAlignment.Left,
                 Margin = new Thickness(0f, 0f, 0f, 5f),

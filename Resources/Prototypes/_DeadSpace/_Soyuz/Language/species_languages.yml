@@ -1,0 +1,31 @@
+  name: Oni
+  obfuscation:
+    !type:ReplacementObfuscation
+      replacement: ["грр", "ррх", "урх", "вхр", "хар", "офф", "ррах", "хрр", "гхр", "брр", "бух", "охр"]
+  speech:
+    color: "#FF9AA2"
+    allowRadio: true
+
+  name: Harpy
+  obfuscation:
+    !type:ReplacementObfuscation
+      replacement: ["киа", "кья", "ааа", "иии", "крии", "кри", "вии", "виии", "чии", "чиии", "арь", "ииа"]
+  speech:
+    color: "#FFE599"
+    allowRadio: true
+
+  name: Ariral
+  obfuscation:
+    !type:ReplacementObfuscation
+      replacement: ["шзо", "зоак", "ша", "сза", "ррх", "аак", "орх", "кзо", "жа", "лхз", "хра", "шрр"]
+  speech:
+    color: "#B0E0FF"
+    allowRadio: true
+
+  name: Goblin
+  obfuscation:
+    !type:ReplacementObfuscation
+      replacement: ["хех", "хехе", "хрр", "кхк", "кхе", "хрх", "кек", "гхх", "гыг", "хиы", "гыы", "кых"]
+  speech:
+    color: "#C5FF9F"
+    allowRadio: true

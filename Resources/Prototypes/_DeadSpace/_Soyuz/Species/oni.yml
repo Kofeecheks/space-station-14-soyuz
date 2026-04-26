@@ -1,4 +1,4 @@
-- type: species
+﻿- type: species
   id: Oni
   name: species-name-oni
   roundStart: true
@@ -11,7 +11,7 @@
   femaleFirstNames: NamesOniFemale
   maleLastNames: NamesOniLocation # Corvax-LastnameGender
   femaleLastNames: NamesOniLocation # Corvax-LastnameGender
-  naming: LastNoFirst
+  naming: FirstLast
 
 - type: markingPoints
   id: MobOniMarkingLimits
@@ -39,4 +39,5 @@
       required: false
     # DS14-Soyuz: apparently these don't exist on Delta
     # End DS14-Soyuz
+
 

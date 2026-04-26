@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   save: false
   name: Urist McHarpy
   parent: BaseMobHuman
@@ -44,8 +44,6 @@
       - map: [ "enum.HumanoidVisualLayers.LLeg" ]
       - map: [ "underwearb" ] # Sirena-Underwear
       - map: [ "underweart" ] # Sirena-Underwear
-      - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
-      - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
       - map: [ "socks" ]
       - map: [ "jumpsuit" ]
       - map: ["enum.HumanoidVisualLayers.LFoot"]
@@ -75,15 +73,11 @@
         sprite: "Effects/creampie.rsi"
         state: "creampie_human"
         visible: false
-      - map: [ "enum.HumanoidVisualLayers.RArmExtension" ] # DS14-Soyuz
+      - map: [ "enum.HumanoidVisualLayers.RArm" ] # DS14-Soyuz
       - map: [ "enum.HumanoidVisualLayers.Hair" ]
       - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
       - map: [ "mask" ]
       - map: [ "head" ]
-      - map: [ enum.InstrumentVisuals.Layer ]
-        sprite: _DV/Effects/harpysinger.rsi
-        state: singing_music_notes
-        visible: false
   - type: HumanoidAppearance
     species: Harpy
   - type: Fixtures
@@ -125,13 +119,6 @@
       Male: SoundsHarpy
       Female: SoundsHarpy
       Unsexed: SoundsHarpy
-  - type: InstrumentVisuals
-  - type: GenericVisualizer
-    visuals:
-      enum.InstrumentVisuals.Playing:
-        enum.InstrumentVisuals.Layer:
-          False: {visible: false}
-          True: {visible: true}
   - type: MovementSpeedModifier
 #    baseWalkSpeed: 2.5 # DS14-Soyuz
 #    baseSprintSpeed: 5.0 # DS14-Soyuz
@@ -184,8 +171,6 @@
       - map: [ "enum.HumanoidVisualLayers.LLeg" ]
       - map: [ "underwearb" ] # Sirena-Underwear
       - map: [ "underweart" ] # Sirena-Underwear
-      - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
-      - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
       - map: [ "socks" ]
       - map: [ "jumpsuit" ]
       - map: ["enum.HumanoidVisualLayers.LFoot"]
@@ -211,7 +196,7 @@
         sprite: "Effects/creampie.rsi"
         state: "creampie_human"
         visible: false
-      - map: [ "enum.HumanoidVisualLayers.RArmExtension" ] # DS14-Soyuz
+      - map: [ "enum.HumanoidVisualLayers.RArm" ] # DS14-Soyuz
       - map: [ "enum.HumanoidVisualLayers.Hair" ]
       - map: [ "mask" ]
       - map: [ "head" ]
@@ -240,3 +225,4 @@
     itemIconStyle: BigAction
   - type: InstantAction # DS14-Soyuz, Wizden#27422 compliance
     event: !type:VoiceMaskSetNameEvent
+

@@ -1,31 +1,79 @@
+﻿- type: language
+  id: Oni
   name: Oni
-  obfuscation:
-    !type:ReplacementObfuscation
-      replacement: ["грр", "ррх", "урх", "вхр", "хар", "офф", "ррах", "хрр", "гхр", "брр", "бух", "охр"]
-  speech:
-    color: "#FF9AA2"
-    allowRadio: true
+  speechMode: Syllable
+  minSyllables: 1
+  maxSyllables: 2
+  syllables:
+    - grr
+    - rrh
+    - urh
+    - vhr
+    - har
+    - off
+    - rrah
+    - hrr
+    - ghr
+    - brr
+    - buh
+    - ohr
 
+- type: language
+  id: Harpy
   name: Harpy
-  obfuscation:
-    !type:ReplacementObfuscation
-      replacement: ["киа", "кья", "ааа", "иии", "крии", "кри", "вии", "виии", "чии", "чиии", "арь", "ииа"]
-  speech:
-    color: "#FFE599"
-    allowRadio: true
+  speechMode: Syllable
+  minSyllables: 1
+  maxSyllables: 2
+  syllables:
+    - kia
+    - kya
+    - aaa
+    - iii
+    - krii
+    - kri
+    - vii
+    - viii
+    - chii
+    - chiii
+    - ary
+    - iia
 
+- type: language
+  id: Ariral
   name: Ariral
-  obfuscation:
-    !type:ReplacementObfuscation
-      replacement: ["шзо", "зоак", "ша", "сза", "ррх", "аак", "орх", "кзо", "жа", "лхз", "хра", "шрр"]
-  speech:
-    color: "#B0E0FF"
-    allowRadio: true
+  speechMode: Syllable
+  minSyllables: 1
+  maxSyllables: 2
+  syllables:
+    - shzo
+    - zoak
+    - sha
+    - sza
+    - rrh
+    - aak
+    - orh
+    - kzo
+    - zha
+    - lhz
+    - hra
+    - shrr
 
+- type: language
+  id: Goblin
   name: Goblin
-  obfuscation:
-    !type:ReplacementObfuscation
-      replacement: ["хех", "хехе", "хрр", "кхк", "кхе", "хрх", "кек", "гхх", "гыг", "хиы", "гыы", "кых"]
-  speech:
-    color: "#C5FF9F"
-    allowRadio: true
+  speechMode: Syllable
+  minSyllables: 1
+  maxSyllables: 2
+  syllables:
+    - heh
+    - hehe
+    - hrr
+    - khk
+    - khe
+    - hrh
+    - kek
+    - ghh
+    - gyg
+    - hyy
+    - gyy
+    - kyk

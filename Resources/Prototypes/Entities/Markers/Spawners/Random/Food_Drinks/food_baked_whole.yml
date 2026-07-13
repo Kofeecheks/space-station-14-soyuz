@@ -46,7 +46,6 @@
       - FoodPieCherry
       - FoodPieMeat
       - FoodPieFrosty
-      - FoodTartPear # Kofeecheks Pears: LicenseRef-Kofeecheks
       - FoodBakedBrownieBatch
     chance: 0.8
     offset: 0.0

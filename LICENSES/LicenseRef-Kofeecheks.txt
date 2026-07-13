@@ -15,11 +15,8 @@ The covered work currently includes, without limitation:
 - Content.Client/DeadSpace/_Soyuz/Jukebox/**
 - Content.Server/DeadSpace/_Soyuz/Jukebox/**
 - Content.Shared/DeadSpace/_Soyuz/Jukebox/**
-- Resources/Prototypes/_DeadSpace/_Soyuz/Pears/**
-- Resources/Locale/*/_deadspace/_Soyuz/pears/**
 - Kofeecheks-authored jukebox catalogs and locale files bearing the identifier
 - Jukebox-specific integration additions explicitly marked with the identifier
-- Pear-specific integration additions explicitly marked with the identifier
 
 The covered work is a separately licensed element and is not licensed under the
 repository-level LICENSE.TXT.
@@ -37,8 +34,8 @@ copyright holder.
 This notice does not claim copyright in pre-existing upstream code, audio
 recordings, fonts, sprites, artwork, engine code, or other third-party
 materials. Those materials retain their respective copyright and license
-terms. In particular, media files remain governed by their embedded metadata,
-attribution records, and applicable third-party rights.
+terms. In particular, audio files remain governed by their attribution metadata
+and applicable third-party rights.
 
 This notice does not attempt to revoke or alter rights that may already have
 been validly granted in earlier revisions under a separate agreement.

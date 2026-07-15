@@ -107,7 +107,7 @@ namespace Content.Server.Atmos.EntitySystems
 
             // Keep the tile active while its Iprit decay timer is pending.
             // Kofeecheks Iprit decay: LicenseRef-Kofeecheks
-            var remove = tile.Air.IpritDecayDeadline == TimeSpan.Zero;
+            var remove = tile.Air!.IpritDecayDeadline == TimeSpan.Zero;
 
             if(tile.Air!.Temperature > Atmospherics.MinimumTemperatureStartSuperConduction)
                 if (ConsiderSuperconductivity(gridAtmosphere, tile, true))

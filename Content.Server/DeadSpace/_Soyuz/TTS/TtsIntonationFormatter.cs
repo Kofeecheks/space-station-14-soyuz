@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: 2026 Kofeecheks
 // SPDX-License-Identifier: LicenseRef-Kofeecheks
 
+using System.Linq;
 using System.Security;
 using System.Text.RegularExpressions;
 

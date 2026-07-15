@@ -1,0 +1,15 @@
+- type: constructionGraph
+  id: EnergyShield
+  start: brokenEnergyShield
+  graph:
+    - node: brokenEnergyShield
+      entity: BrokenEnergyShield
+      edges:
+        - to: energyShield
+          steps:
+            - material: Plasteel
+              amount: 1
+              doAfter: 5
+
+    - node: energyShield
+      entity: EnergyShield

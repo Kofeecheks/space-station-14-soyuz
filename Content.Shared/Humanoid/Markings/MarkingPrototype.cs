@@ -39,6 +39,12 @@ namespace Content.Shared.Humanoid.Markings
         public MarkingColors Coloring { get; private set; } = new();
 
         /// <summary>
+        /// Optional shader applied to every sprite layer of the marking.
+        /// </summary>
+        [DataField]
+        public string? Shader { get; private set; }
+
+        /// <summary>
         /// Do we need to apply any displacement maps to this marking? Set to false if your marking is incompatible
         /// with a standard human doll, and is used for some special races with unusual shapes
         /// </summary>

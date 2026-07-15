@@ -672,6 +672,9 @@
       damageContainer: Shield
     - type: ExaminableDamage
       messages: EnergyShieldMessages
+    - type: Construction
+      graph: EnergyShield
+      node: energyShield
     - type: Destructible
       thresholds:
 #        - trigger:
@@ -721,6 +724,9 @@
       sprite: Objects/Weapons/Melee/e_shield.rsi
       size: Small
       heldPrefix: eshield
+    - type: Construction
+      graph: EnergyShield
+      node: brokenEnergyShield
     #DS14-Start
     - type: EmitSoundOnPickup
       sound:

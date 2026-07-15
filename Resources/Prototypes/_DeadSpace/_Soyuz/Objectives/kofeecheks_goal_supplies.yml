@@ -34,7 +34,7 @@
 
 - type: entity
   id: CrateVirologyPlan
-  parent: CrateVirologyBiosuit
+  parent: CrateMedicalSecure
   categories: [ HideSpawnMenu ]
   name: virology reserve crate
   description: Contains a box of samples for the station goal.

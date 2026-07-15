@@ -10,10 +10,36 @@ namespace Content.Server.DeadSpace._Soyuz.TTS;
 /// <summary>
 /// Converts chat punctuation and common text emotions into safe SSML prosody.
 /// </summary>
-public static class TtsIntonationFormatter
+public static partial class TtsIntonationFormatter
 {
-    private const RegexOptions RegexOptions = System.Text.RegularExpressions.RegexOptions.IgnoreCase |
-                                              System.Text.RegularExpressions.RegexOptions.CultureInvariant;
+    private const RegexOptions CommonRegexOptions = RegexOptions.IgnoreCase | RegexOptions.CultureInvariant;
+
+    [GeneratedRegex(@"(?:^|\s)/s\s*$", CommonRegexOptions)]
+    private static partial Regex SarcasmRegex();
+
+    [GeneratedRegex(@"(?<marker>:'\(|:-O|:-/|:/|:-?\)|:-?\(|:D|;-?\)|\^\^+|~+|\)+|\(+)\s*$", CommonRegexOptions)]
+    private static partial Regex EmotionMarkerRegex();
+
+    [GeneratedRegex(@"(?:\?+!+|!+\?+|[!?]*[!?][!?]+)\s*$")]
+    private static partial Regex StrongPunctuationRegex();
+
+    [GeneratedRegex(@"(?:\.{3,}|\u2026|,{2,})\s*$")]
+    private static partial Regex ThoughtfulPunctuationRegex();
+
+    [GeneratedRegex(@"\?\s*$")]
+    private static partial Regex QuestionRegex();
+
+    [GeneratedRegex(@"!\s*$")]
+    private static partial Regex ExclamationRegex();
+
+    [GeneratedRegex(@"[!?]{2,}\s*$")]
+    private static partial Regex NormalizeStrongPunctuationRegex();
+
+    [GeneratedRegex(@"\.{4,}\s*$")]
+    private static partial Regex NormalizeEllipsisRegex();
+
+    [GeneratedRegex(@",{2,}\s*$")]
+    private static partial Regex NormalizeCommaPauseRegex();
 
     private static readonly (string Symbol, TtsIntonationStyle Style)[] EmojiMap =
     {
@@ -61,7 +87,7 @@ public static class TtsIntonationFormatter
         var text = rawText.Trim();
         TtsIntonationStyle? explicitStyle = null;
 
-        var sarcasm = Regex.Match(text, @"(?:^|\s)/s\s*$", RegexOptions);
+        var sarcasm = SarcasmRegex().Match(text);
         if (sarcasm.Success)
         {
             explicitStyle = TtsIntonationStyle.Sarcastic;
@@ -74,10 +100,7 @@ public static class TtsIntonationFormatter
             text = text.Replace(symbol, string.Empty, StringComparison.Ordinal);
         }
 
-        var marker = Regex.Match(
-            text,
-            @"(?<marker>:'\(|:-O|:-/|:/|:-?\)|:-?\(|:D|;-?\)|\^\^+|~+|\)+|\(+)\s*$",
-            RegexOptions);
+        var marker = EmotionMarkerRegex().Match(text);
 
         TtsIntonationStyle? markerStyle = null;
         if (marker.Success)
@@ -154,22 +177,23 @@ public static class TtsIntonationFormatter
 
     private static TtsIntonationStyle GetPunctuationStyle(string text)
     {
-        if (Regex.IsMatch(text, @"(?:\?+!+|!+\?+|[!?]*[!?][!?]+)\s*$"))
+        var strongPunctuation = StrongPunctuationRegex().Match(text);
+        if (strongPunctuation.Success)
         {
-            var punctuation = Regex.Match(text, @"[!?]+\s*$").Value;
+            var punctuation = strongPunctuation.Value;
             if (punctuation.Contains('?') && !punctuation.Contains('!') && punctuation.Count(c => c == '?') >= 3)
                 return TtsIntonationStyle.Surprised;
 
             return TtsIntonationStyle.Intense;
         }
 
-        if (Regex.IsMatch(text, @"(?:\.{3,}|\u2026|,{2,})\s*$"))
+        if (ThoughtfulPunctuationRegex().IsMatch(text))
             return TtsIntonationStyle.Thoughtful;
 
-        if (Regex.IsMatch(text, @"\?\s*$"))
+        if (QuestionRegex().IsMatch(text))
             return TtsIntonationStyle.Question;
 
-        if (Regex.IsMatch(text, @"!\s*$"))
+        if (ExclamationRegex().IsMatch(text))
             return TtsIntonationStyle.Exclamation;
 
         return TtsIntonationStyle.Neutral;
@@ -177,9 +201,9 @@ public static class TtsIntonationFormatter
 
     private static string NormalizeTerminalPunctuation(string text)
     {
-        text = Regex.Replace(text, @"[!?]{2,}\s*$", match => match.Value.Contains('?') ? "?" : "!");
-        text = Regex.Replace(text, @"\.{4,}\s*$", "...");
-        text = Regex.Replace(text, @",{2,}\s*$", ",");
+        text = NormalizeStrongPunctuationRegex().Replace(text, match => match.Value.Contains('?') ? "?" : "!");
+        text = NormalizeEllipsisRegex().Replace(text, "...");
+        text = NormalizeCommaPauseRegex().Replace(text, ",");
         return text;
     }
 

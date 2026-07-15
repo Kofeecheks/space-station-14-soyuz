@@ -15,11 +15,15 @@ The covered work currently includes, without limitation:
 - Content.Client/DeadSpace/_Soyuz/Jukebox/**
 - Content.Server/DeadSpace/_Soyuz/Jukebox/**
 - Content.Shared/DeadSpace/_Soyuz/Jukebox/**
+- Content.Client/DeadSpace/_Soyuz/Janitorial/**
 - Resources/Prototypes/_DeadSpace/_Soyuz/Pears/**
+- Resources/Prototypes/_DeadSpace/_Soyuz/Janitorial/**
 - Resources/Locale/*/_deadspace/_Soyuz/pears/**
+- Resources/Locale/*/_deadspace/_Soyuz/janitorial/**
 - Kofeecheks-authored jukebox catalogs and locale files bearing the identifier
 - Jukebox-specific integration additions explicitly marked with the identifier
 - Pear-specific integration additions explicitly marked with the identifier
+- Electrical-wire-brush integration additions explicitly marked with the identifier
 
 The covered work is a separately licensed element and is not licensed under the
 repository-level LICENSE.TXT.

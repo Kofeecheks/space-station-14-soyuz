@@ -45,6 +45,14 @@
   - !type:HiliumProductionReaction {}
 
 - type: gasReaction
+  id: IpritDecay
+  priority: 6
+  minimumRequirements:
+    Iprit: 0.00000005
+  effects:
+  - !type:IpritDecayReaction {}
+
+- type: gasReaction
   id: IpritProduction
   priority: 5
   minimumTemperature: 65
@@ -54,12 +62,3 @@
     Fixirium: 0.01
   effects:
   - !type:IpritProductionReaction {}
-
-- type: gasReaction
-  id: IpritNitrogenAmplification
-  priority: 4
-  minimumRequirements:
-    Nitrogen: 0.01
-    Iprit: 0.01
-  effects:
-  - !type:IpritNitrogenAmplificationReaction {}

@@ -17,4 +17,4 @@ reagent-name-brizidium = brizidium
 reagent-desc-brizidium = A narcotic gas with a distinctly nauseating aftereffect.
 
 reagent-name-iprit = iprit
-reagent-desc-iprit = An extremely dangerous war gas that suffocates and heavily irritates.
+reagent-desc-iprit = An extremely dangerous war gas that suffocates and heavily irritates. It completely decays into oxygen after 30 seconds.

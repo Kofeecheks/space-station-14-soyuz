@@ -195,6 +195,33 @@ public sealed partial class HiliumProductionReaction : IGasReactionEffect
 }
 
 [UsedImplicitly]
+public sealed partial class IpritDecayReaction : IGasReactionEffect
+{
+    public static readonly TimeSpan Lifetime = TimeSpan.FromSeconds(30);
+
+    public ReactionResult React(GasMixture mixture, IGasMixtureHolder? holder, AtmosphereSystem atmosphereSystem, float heatScale)
+    {
+        var iprit = mixture.GetMoles(Gas.Iprit);
+        if (iprit < Atmospherics.GasMinMoles)
+            return ReactionResult.NoReaction;
+
+        var now = atmosphereSystem.CurrentSimulationTime;
+        if (mixture.IpritDecayDeadline == TimeSpan.Zero)
+        {
+            mixture.EnsureIpritDecayDeadline(now + Lifetime);
+            return ReactionResult.NoReaction;
+        }
+
+        if (now < mixture.IpritDecayDeadline)
+            return ReactionResult.NoReaction;
+
+        mixture.SetMoles(Gas.Iprit, 0f);
+        mixture.AdjustMoles(Gas.Oxygen, iprit);
+        return ReactionResult.Reacting;
+    }
+}
+
+[UsedImplicitly]
 public sealed partial class IpritProductionReaction : IGasReactionEffect
 {
     private const float ConversionDivisor = 10f;
@@ -215,42 +242,7 @@ public sealed partial class IpritProductionReaction : IGasReactionEffect
         mixture.AdjustMoles(Gas.Tritium, -reacted);
         mixture.AdjustMoles(Gas.Fixirium, -reacted);
         mixture.AdjustMoles(Gas.Iprit, reacted * 2f);
-
-        SoyuzGasReactionHelpers.ApplyEnergy(
-            mixture,
-            atmosphereSystem,
-            heatScale,
-            oldHeatCapacity,
-            oldTemperature,
-            reacted * 2f * EnergyPerMole);
-
-        return ReactionResult.Reacting;
-    }
-}
-
-[UsedImplicitly]
-public sealed partial class IpritNitrogenAmplificationReaction : IGasReactionEffect
-{
-    private const float ConversionDivisor = 8f;
-    private const float EnergyPerMole = 70_000f;
-
-    public ReactionResult React(GasMixture mixture, IGasMixtureHolder? holder, AtmosphereSystem atmosphereSystem, float heatScale)
-    {
-        var nitrogen = mixture.GetMoles(Gas.Nitrogen);
-        var iprit = mixture.GetMoles(Gas.Iprit);
-
-        if (nitrogen <= 0f || iprit <= 0f)
-            return ReactionResult.NoReaction;
-
-        var reacted = nitrogen / ConversionDivisor;
-        if (reacted <= 0f)
-            return ReactionResult.NoReaction;
-
-        var oldTemperature = mixture.Temperature;
-        var oldHeatCapacity = atmosphereSystem.GetHeatCapacity(mixture, true);
-
-        mixture.AdjustMoles(Gas.Nitrogen, -reacted);
-        mixture.AdjustMoles(Gas.Iprit, reacted * 2f);
+        mixture.EnsureIpritDecayDeadline(atmosphereSystem.CurrentSimulationTime + IpritDecayReaction.Lifetime);
 
         SoyuzGasReactionHelpers.ApplyEnergy(
             mixture,

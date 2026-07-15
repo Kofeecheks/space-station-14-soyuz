@@ -81,16 +81,16 @@ public sealed class DoAfterOverlay : Overlay
             if (comp.DoAfters.Count == 0)
                 continue;
 
+            // Do-after progress is private to the player performing the action.
+            // Do not draw another player's action bar at all.
+            if (uid != localEnt)
+                continue;
+
             var worldPosition = _transform.GetWorldPosition(xform, xformQuery);
             if (!bounds.Contains(worldPosition))
                 continue;
 
-            // shades the do-after bar if the do-after bar belongs to other players
-            // does not shade do-afters belonging to the local player
-            if (uid != localEnt)
-                handle.UseShader(null);
-            else
-                handle.UseShader(_unshadedShader);
+            handle.UseShader(_unshadedShader);
 
             // If the entity is paused, we will draw the do-after as it was when the entity got paused.
             var meta = metaQuery.GetComponent(uid);

@@ -69,6 +69,7 @@ public sealed class FloorTileSystem : EntitySystem
             return;
 
         var physicQuery = GetEntityQuery<PhysicsComponent>();
+        var fixturesQuery = GetEntityQuery<FixturesComponent>();
         var transformQuery = GetEntityQuery<TransformComponent>();
 
         var map = _transform.ToMapCoordinates(location);
@@ -113,14 +114,32 @@ public sealed class FloorTileSystem : EntitySystem
         {
             _turfCheck.Clear();
             _lookup.GetEntitiesInTile(tileRef.Value, _turfCheck);
+            // Kofeecheks tile-center collision fix: LicenseRef-Kofeecheks
+            var tileCenter = tileRef.Value.GridIndices + new Vector2(0.5f, 0.5f);
+
             foreach (var ent in _turfCheck)
             {
                 if (physicQuery.TryGetComponent(ent, out var phys) &&
                     phys.BodyType == BodyType.Static &&
+                    phys.CanCollide &&
                     phys.Hard &&
                     (phys.CollisionLayer & (int)CollisionGroup.Impassable) != 0)
                 {
-                    return;
+                    if (!fixturesQuery.TryGetComponent(ent, out var fixtures) ||
+                        !transformQuery.TryGetComponent(ent, out var xform))
+                    {
+                        return;
+                    }
+
+                    var fixtureXform = new Transform(xform.LocalPosition, xform.LocalRotation);
+                    foreach (var fixture in fixtures.Fixtures.Values)
+                    {
+                        if (!fixture.Hard || (fixture.CollisionLayer & (int) CollisionGroup.Impassable) == 0)
+                            continue;
+
+                        if (fixture.Shape.ComputeAABB(fixtureXform, 0).Contains(tileCenter))
+                            return;
+                    }
                 }
             }
         }

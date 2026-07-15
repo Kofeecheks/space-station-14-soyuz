@@ -20,10 +20,42 @@ The covered work currently includes, without limitation:
 - Resources/Prototypes/_DeadSpace/_Soyuz/Janitorial/**
 - Resources/Locale/*/_deadspace/_Soyuz/pears/**
 - Resources/Locale/*/_deadspace/_Soyuz/janitorial/**
+- Content.Server/DeadSpace/_Soyuz/Atmos/**
+- Content.Server/DeadSpace/_Soyuz/Bible/**
+- Content.Server/DeadSpace/_Soyuz/BlueInsulatingTape/**
+- Content.Server/DeadSpace/_Soyuz/PoliticalLoudspeaker/**
+- Content.Server/DeadSpace/_Soyuz/TTS/**
+- Content.Shared/DeadSpace/_Soyuz/BlueInsulatingTape/**
+- Content.Shared/DeadSpace/_Soyuz/EntityEffects/**
+- Content.Shared/DeadSpace/_Soyuz/PoliticalLoudspeaker/**
+- Resources/Prototypes/_DeadSpace/_Soyuz/Atmospherics/**
+- Resources/Prototypes/_DeadSpace/_Soyuz/Objectives/kofeecheks_goals.yml
+- Resources/Prototypes/_DeadSpace/_Soyuz/Objectives/kofeecheks_goal_supplies.yml
+- Resources/Prototypes/_DeadSpace/_Soyuz/Reagents/gases.yml
+- Resources/Prototypes/_DeadSpace/_Soyuz/Entities/Objects/Specific/Medical/blue_insulating_tape.yml
+- Resources/Prototypes/_DeadSpace/_Soyuz/Recipes/Lathes/blue_insulating_tape.yml
+- Resources/Prototypes/_DeadSpace/_Soyuz/Stacks/blue_insulating_tape.yml
+- Resources/Paperwork/StationGoal/AmbuzolReserve.xml
+- Resources/Paperwork/StationGoal/DelegationReception.xml
+- Resources/Paperwork/StationGoal/Karachnoc.xml
+- Resources/Paperwork/StationGoal/LongRangeExpeditions.xml
+- Resources/Paperwork/StationGoal/SeedFund.xml
+- Resources/Paperwork/StationGoal/Theater.xml
+- Resources/Locale/*/_deadspace/_Soyuz/atmos/**
+- Resources/Locale/*/_deadspace/_Soyuz/chapel/**
+- Resources/Locale/*/_deadspace/_Soyuz/gases/**
+- Resources/Locale/*/_deadspace/_Soyuz/medical/blue-insulating-tape.ftl
+- Resources/Locale/*/_deadspace/_Soyuz/reagents/meta/gases.ftl
+- Resources/Locale/*/_deadspace/_Soyuz/political_loudspeaker.ftl
 - Kofeecheks-authored jukebox catalogs and locale files bearing the identifier
 - Jukebox-specific integration additions explicitly marked with the identifier
 - Pear-specific integration additions explicitly marked with the identifier
 - Electrical-wire-brush integration additions explicitly marked with the identifier
+- Kofeecheks-authored gas, station-goal, Bible-revival, political-loudspeaker,
+  blue-insulating-tape, TTS-intonation, guidebook-recipe, and quality-of-life integration
+  additions explicitly marked with the identifier
+- Kofeecheks additional cooking-recipe blocks explicitly marked with
+  "Kofeecheks additional meals and desserts: LicenseRef-Kofeecheks"
 
 The covered work is a separately licensed element and is not licensed under the
 repository-level LICENSE.TXT.

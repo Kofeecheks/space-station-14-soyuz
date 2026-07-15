@@ -5,9 +5,19 @@
   styles:
     air: AirCanister
     ammonia: AmmoniaCanister
+    brizidium: BrizidiumCanister # Kofeecheks QoL: LicenseRef-Kofeecheks
     carbon-dioxide: CarbonDioxideCanister
     frezon: FrezonCanister
+    fixirium: FixiriumCanister # Kofeecheks QoL: LicenseRef-Kofeecheks
+    hilium: HiliumCanister # Kofeecheks QoL: LicenseRef-Kofeecheks
+    hydrogen: HydrogenCanister # Kofeecheks QoL: LicenseRef-Kofeecheks
+    iprit: IpritCanister # Kofeecheks QoL: LicenseRef-Kofeecheks
+    liquid-carbon-dioxide: LiquidCarbonDioxideCanister
+    liquid-nitrogen: LiquidNitrogenCanister
+    liquid-oxygen: LiquidOxygenCanister
     nitrogen: NitrogenCanister
+    nitriatium: NitriatiumCanister # Kofeecheks QoL: LicenseRef-Kofeecheks
+    nitryl: NitrylCanister # Kofeecheks QoL: LicenseRef-Kofeecheks
     nitrous-oxide: NitrousOxideCanister
     oxygen: OxygenCanister
     plasma: PlasmaCanister

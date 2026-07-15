@@ -120,9 +120,10 @@ public sealed class TTSSystem : EntitySystem
         AudioResource? audioResource = null;
         ResPath? filePath = null;
 
+        // Kofeecheks political loudspeaker TTS integration: LicenseRef-Kofeecheks
         var audioParams = AudioParams.Default
-            .WithVolume(AdjustVolume(ev.IsWhisper, ev.IsRadio))
-            .WithMaxDistance(AdjustDistance(ev.IsWhisper));
+            .WithVolume(AdjustVolume(ev.IsWhisper, ev.IsRadio, ev.VolumeMultiplier))
+            .WithMaxDistance(AdjustDistance(ev.IsWhisper, ev.DistanceMultiplier));
 
         // Если есть обычные данные TTS — готовим ресурс
         if (hasData)
@@ -159,7 +160,7 @@ public sealed class TTSSystem : EntitySystem
             _contentRoot.RemoveFile(filePath.Value);
     }
 
-    private float AdjustVolume(bool isWhisper, bool isRadio)
+    private float AdjustVolume(bool isWhisper, bool isRadio, float volumeMultiplier)
     {
         var volume = MinimalVolume + SharedAudioSystem.GainToVolume(_volume);
 
@@ -172,11 +173,15 @@ public sealed class TTSSystem : EntitySystem
             volume = MinimalVolume + SharedAudioSystem.GainToVolume(_volumeRadio);
         }
 
+        if (!isRadio && volumeMultiplier > 1f)
+            volume += SharedAudioSystem.GainToVolume(volumeMultiplier);
+
         return volume;
     }
 
-    private float AdjustDistance(bool isWhisper)
+    private float AdjustDistance(bool isWhisper, float distanceMultiplier)
     {
-        return isWhisper ? SharedChatSystem.WhisperMuffledRange : SharedChatSystem.VoiceRange;
+        var baseDistance = isWhisper ? SharedChatSystem.WhisperMuffledRange : SharedChatSystem.VoiceRange;
+        return baseDistance * MathF.Max(distanceMultiplier, 0f);
     }
 }

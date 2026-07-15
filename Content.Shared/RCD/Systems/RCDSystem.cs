@@ -23,6 +23,7 @@ using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using System.Linq;
+using System.Numerics;
 
 namespace Content.Shared.RCD.Systems;
 
@@ -253,8 +254,9 @@ public sealed class RCDSystem : EntitySystem
         if (HasComp<RCDDeconstructableComponent>(target.Value))
             return target;
 
-        if (TryComp<PhysicsComponent>(target.Value, out var physics) && physics.CanCollide)
-            return target;
+        // Kofeecheks RCD target normalization: LicenseRef-Kofeecheks
+        if (TryComp<PhysicsComponent>(target.Value, out var physics))
+            return physics.CanCollide ? target : null;
 
         if (TryComp<FixturesComponent>(target.Value, out var fixtures))
         {
@@ -542,10 +544,16 @@ public sealed class RCDSystem : EntitySystem
                     if (!fixture.Hard || fixture.CollisionLayer <= 0 || (fixture.CollisionLayer & (int)prototype.CollisionMask) == 0)
                         continue;
 
-                    // Continue if our custom collision bounds are not intersected
-                    if (prototype.CollisionPolygon != null &&
-                        !DoesCustomBoundsIntersectWithFixture(prototype.CollisionPolygon, component.ConstructionTransform, ent, fixture))
+                    if (prototype.CollisionPolygon != null)
+                    {
+                        if (!DoesCustomBoundsIntersectWithFixture(prototype.CollisionPolygon, component.ConstructionTransform, ent, fixture))
+                            continue;
+                    }
+                    // Kofeecheks tile-center collision fix: LicenseRef-Kofeecheks
+                    else if (!DoesFixtureCoverTileCenter(ent, fixture, position))
+                    {
                         continue;
+                    }
 
                     // Collision was detected
                     if (popMsgs)
@@ -574,7 +582,7 @@ public sealed class RCDSystem : EntitySystem
             }
 
             // The tile has a structure sitting on it
-            if (_turf.IsTileBlocked(tile, CollisionGroup.MobMask))
+            if (IsTileCenterBlockedByImpassable(tile))
             {
                 if (popMsgs)
                     _popup.PopupClient(Loc.GetString("rcd-component-tile-obstructed-message"), uid, user);
@@ -682,6 +690,52 @@ public sealed class RCDSystem : EntitySystem
         var entXform = new Transform(new(), entXformComp.LocalRotation);
 
         return boundingPolygon.ComputeAABB(boundingTransform, 0).Intersects(fixture.Shape.ComputeAABB(entXform, 0));
+    }
+
+    // Kofeecheks tile-center collision fix: LicenseRef-Kofeecheks
+    private bool DoesFixtureCoverTileCenter(EntityUid fixtureOwner, Fixture fixture, Vector2i position)
+    {
+        var tileCenter = position + new Vector2(0.5f, 0.5f);
+        var xform = Transform(fixtureOwner);
+        var fixtureXform = new Transform(xform.LocalPosition, xform.LocalRotation);
+        return fixture.Shape.ComputeAABB(fixtureXform, 0).Contains(tileCenter);
+    }
+
+    // Kofeecheks tile-center collision fix: LicenseRef-Kofeecheks
+    private bool IsTileCenterBlockedByImpassable(TileRef tile)
+    {
+        var tileCenter = tile.GridIndices + new Vector2(0.5f, 0.5f);
+
+        _intersectingEntities.Clear();
+        _lookup.GetEntitiesInTile(tile, _intersectingEntities, LookupFlags.Uncontained);
+
+        foreach (var ent in _intersectingEntities)
+        {
+            if (!TryComp<PhysicsComponent>(ent, out var physics) ||
+                physics.BodyType != BodyType.Static ||
+                !physics.CanCollide ||
+                !physics.Hard ||
+                (physics.CollisionLayer & (int) CollisionGroup.Impassable) == 0)
+            {
+                continue;
+            }
+
+            if (!TryComp<FixturesComponent>(ent, out var fixtures))
+                return true;
+
+            var xform = Transform(ent);
+            var fixtureXform = new Transform(xform.LocalPosition, xform.LocalRotation);
+            foreach (var fixture in fixtures.Fixtures.Values)
+            {
+                if (!fixture.Hard || (fixture.CollisionLayer & (int) CollisionGroup.Impassable) == 0)
+                    continue;
+
+                if (fixture.Shape.ComputeAABB(fixtureXform, 0).Contains(tileCenter))
+                    return true;
+            }
+        }
+
+        return false;
     }
 
     #endregion

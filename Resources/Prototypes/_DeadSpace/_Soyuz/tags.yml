@@ -1,5 +1,9 @@
 # Ставить новые теги строго в алфавитном порядке A-Z
 
+# Kofeecheks QoL: LicenseRef-Kofeecheks
+- type: Tag
+  id: BlueInsulatingTape
+
 - type: Tag
   id: CartridgeLightestRifle
 

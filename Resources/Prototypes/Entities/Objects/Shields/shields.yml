@@ -675,6 +675,7 @@
     - type: Construction
       graph: EnergyShield
       node: energyShield
+      deconstructionTarget: null
     - type: Destructible
       thresholds:
 #        - trigger:
@@ -727,6 +728,7 @@
     - type: Construction
       graph: EnergyShield
       node: brokenEnergyShield
+      deconstructionTarget: null
     #DS14-Start
     - type: EmitSoundOnPickup
       sound:

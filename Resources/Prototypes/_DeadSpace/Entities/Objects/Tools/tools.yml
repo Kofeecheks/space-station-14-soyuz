@@ -11,6 +11,7 @@
   - type: RCD
     availablePrototypes:
     - WallSolidCE
+    - WallMiningCE
     - FloorSteel
     - Plating
     - Catwalk
@@ -19,6 +20,7 @@
     - WindowDirectionalCE
     - WindowReinforcedDirectionalCE
     - ReinforcedWindowCE
+    - MiningWindowCE
     - AirlockCE
     - AirlockGlassCE
     - FirelockCE
@@ -29,6 +31,8 @@
     - HVCable
     - CableTerminal
     - Deconstruct
+  - type: AutoRecharge
+    rechargeDuration: 20
 
 - type: entity
   name: кроваво-красный сварочный аппарат

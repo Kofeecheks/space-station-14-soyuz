@@ -37,16 +37,16 @@
   flavorType: Complex
   description: flavor-complex-granatapfel
 
-- type: tag
+- type: Tag
   id: Lemo
 
-- type: tag
+- type: Tag
   id: ShellCoconut
 
-- type: tag
+- type: Tag
   id: NFGlowshroomSpores
 
-- type: tag
+- type: Tag
   id: Food
 
 - type: reagent

@@ -3,9 +3,26 @@
 
 # Названия культур
 flavor-complex-spices = как пряности
+flavor-complex-avocado = как сливочное авокадо
+flavor-complex-cucumber = как свежий огурец
+flavor-complex-hairy = странно волосатый
+flavor-complex-honeycomb = как восковой мёд
+flavor-complex-pomegranate = как терпкий гранат
+flavor-complex-granatapfel = как подозрительно шипучий гранат
 reagent-name-everyspice = всепряность
 reagent-desc-everyspice = Универсальная приправа на любой случай.
 food-sequence-content-everyspice = всепряность
+food-sequence-content-avocado = авокадо
+food-sequence-content-cucumber = огурец
+food-sequence-content-pickle = солёный огурец
+food-sequence-content-honeycomb = медовые соты
+food-sequence-content-monkanana = монканана
+food-sequence-content-pomegranate = гранат
+food-sequence-content-granatapfel = гранатапфель
+food-sequence-content-mango = манго
+food-sequence-content-crystal-thistle = кристальный чертополох
+food-sequence-content-ghost-pepper = призрачный перец
+food-sequence-content-revenant = космический ревенант
 reagent-name-butterfliesbigger = экстракт гигантской орхидеи-бабочки
 reagent-desc-butterfliesbigger = Концентрированный экстракт орхидеи, вызывающий непреодолимое чувство порхающих бабочек.
 reagent-physical-desc-reallynervous = крайне нервное
@@ -374,6 +391,8 @@ entity-name-ResinferaSeeds = пакет семян резинферы
 entity-name-RMCFoodMango = манго
 entity-name-RMCMangoSeeds = пакет семян манго
 entity-name-RoseSeeds = пакет семян розы
+entity-name-Rose = роза
+entity-description-Rose = Свежесрезанная роза с острыми шипами.
 entity-name-SnapcornSeeds = пакет семян хлопающей кукурузы
 entity-name-SpesosTreeSeeds = пакет семян дерева золотого листа
 entity-name-StrangeBerrySeeds = пакет семян странных ягод

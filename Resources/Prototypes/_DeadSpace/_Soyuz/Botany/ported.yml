@@ -7,6 +7,48 @@
   flavorType: Complex
   description: flavor-complex-spices
 
+- type: flavor
+  id: avocado
+  flavorType: Complex
+  description: flavor-complex-avocado
+
+- type: flavor
+  id: cucumber
+  flavorType: Complex
+  description: flavor-complex-cucumber
+
+- type: flavor
+  id: hairy
+  flavorType: Complex
+  description: flavor-complex-hairy
+
+- type: flavor
+  id: honeycomb
+  flavorType: Complex
+  description: flavor-complex-honeycomb
+
+- type: flavor
+  id: pomegranate
+  flavorType: Complex
+  description: flavor-complex-pomegranate
+
+- type: flavor
+  id: granatapfel
+  flavorType: Complex
+  description: flavor-complex-granatapfel
+
+- type: tag
+  id: Lemo
+
+- type: tag
+  id: ShellCoconut
+
+- type: tag
+  id: NFGlowshroomSpores
+
+- type: tag
+  id: Food
+
 - type: reagent
   id: Everyspice
   name: reagent-name-everyspice
@@ -126,7 +168,7 @@
   flavor: medicine
   color: "#d34b26"
   metabolisms:
-    Bloodstream:
+    Medicine:
       metabolismRate: 0.2
       effects:
       - !type:HealthChange
@@ -168,6 +210,69 @@
   name: food-sequence-content-everyspice
   sprites:
   - sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/everyspice.rsi
+    state: produce
+
+- type: foodSequenceElement
+  id: Avocado
+  name: food-sequence-content-avocado
+  sprites:
+  - sprite: Objects/Specific/Hydroponics/tomato.rsi
+    state: produce
+
+- type: foodSequenceElement
+  id: Cucumber
+  name: food-sequence-content-cucumber
+  sprites:
+  - sprite: Objects/Specific/Hydroponics/tomato.rsi
+    state: produce
+
+- type: foodSequenceElement
+  id: Pickle
+  name: food-sequence-content-pickle
+  sprites:
+  - sprite: Objects/Specific/Hydroponics/tomato.rsi
+    state: produce
+
+- type: foodSequenceElement
+  id: Honeycomb
+  name: food-sequence-content-honeycomb
+  sprites:
+  - sprite: Objects/Specific/Hydroponics/tomato.rsi
+    state: produce
+
+- type: foodSequenceElement
+  id: Monkanana
+  name: food-sequence-content-monkanana
+  sprites:
+  - sprite: Objects/Specific/Hydroponics/tomato.rsi
+    state: produce
+
+- type: foodSequenceElement
+  id: Pomegranate
+  name: food-sequence-content-pomegranate
+  sprites:
+  - sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/pomegranate.rsi
+    state: produce
+
+- type: foodSequenceElement
+  id: Granatapfel
+  name: food-sequence-content-granatapfel
+  sprites:
+  - sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/granatapfel.rsi
+    state: produce
+
+- type: foodSequenceElement
+  id: RMCMango
+  name: food-sequence-content-mango
+  sprites:
+  - sprite: _DeadSpace/Objects/Specific/Hydroponics/mango.rsi
+    state: produce
+
+- type: foodSequenceElement
+  id: RMCMangoBurger
+  name: food-sequence-content-mango
+  sprites:
+  - sprite: _DeadSpace/Objects/Specific/Hydroponics/mango.rsi
     state: produce
 
 - type: entity
@@ -250,14 +355,14 @@
       types:
         Blunt: 5
     soundHit:
-      path: /Audio/_Impstation/Items/Coconut/bonk.ogg
+      path: /Audio/Items/Toys/card_tube_bonk.ogg
   - type: DamageOtherOnHit
     damage:
       types:
         Blunt: 5
   - type: StaminaDamageOnHit
     damage: 10
-    sound: /Audio/_Impstation/Items/Coconut/bonk.ogg
+    sound: /Audio/Items/Toys/card_tube_bonk.ogg
   - type: LandAtCursor
   - type: Tag
     tags:
@@ -328,7 +433,7 @@
       types:
         Blunt: 5
     soundHit:
-      path: /Audio/_Impstation/Items/Coconut/bonk.ogg
+      path: /Audio/Items/Toys/card_tube_bonk.ogg
   - type: Damageable
     damageContainer: Biological
   - type: DamageOnHighSpeedImpact
@@ -344,7 +449,7 @@
       behaviors:
       - !type:PlaySoundBehavior
         sound:
-          path: /Audio/_Impstation/Items/Coconut/bonk.ogg
+          path: /Audio/Items/Toys/card_tube_bonk.ogg
       - !type:SpillBehavior
         solution: food
       - !type:DoActsBehavior
@@ -424,14 +529,14 @@
       types:
         Blunt: 5
     soundHit:
-      path: /Audio/_Impstation/Items/Coconut/bonk.ogg
+      path: /Audio/Items/Toys/card_tube_bonk.ogg
   - type: DamageOtherOnHit
     damage:
       types:
         Blunt: 15
   - type: StaminaDamageOnHit
     damage: 100 #hehe
-    sound: /Audio/_Impstation/Items/Coconut/bonk.ogg
+    sound: /Audio/Items/Toys/card_tube_bonk.ogg
   - type: LandAtCursor
   - type: Tag
     tags:
@@ -836,12 +941,11 @@
   name: seeds-green-marijuana-name
   noun: seeds-noun-seeds
   displayName: seeds-green-marijuana-display-name
-  singularPlural: true
   plantRsi: Objects/Specific/Hydroponics/cannabis.rsi
   packetPrototype: GreenMarijuanaSeeds
   productPrototypes:
   - LeavesGreenMarijuana
-  - MaterialHemp1
+  - MaterialCloth1
   mutationPrototypes:
   - rainbowCannabis
   harvestRepeat: Repeat
@@ -1682,7 +1786,7 @@
           behaviors:
             - !type:PlaySoundBehavior
               sound:
-                path: /Audio/_NF/Effects/explosions/light-pop.ogg
+                path: /Audio/Effects/pop.ogg
             - !type:TriggerBehavior
               keyOut: granatapfel-trigger
             - !type:DoActsBehavior
@@ -1690,7 +1794,7 @@
     - type: ChemicalAmmo
       solution: food
     - type: ProjectileGrenade
-      fillPrototype: SeedsGranatapfel
+      fillPrototype: GranatapfelSeeds
       capacity: 10
       triggerKey: granatapfel-trigger
     - type: ContainerContainer
@@ -1774,7 +1878,7 @@
             collection: GlassBreak
         - !type:SpawnEntitiesBehavior
           spawn:
-            MobAngryBeeTimed:
+            MobAngryBee:
               min: 1
               max: 1
           transferForensics: true
@@ -1867,8 +1971,6 @@
   growthStages: 2
   idealLight: 6
   seedless: true # clip your coupons
-  preventSwabbing: true # don't swab your money.
-  permanentlySeedless: true
 
 - type: seed
   id: coffee
@@ -1955,7 +2057,6 @@
   id: bees
   name: seeds-bees-name
   noun: seeds-noun-nothing
-  packetName: botany-seed-jar-name
   displayName: seeds-bees-display-name
   plantRsi: Objects/Specific/Hydroponics/tomato.rsi
   packetPrototype: BeeSeeds
@@ -1977,7 +2078,6 @@
       Min: 1
       Max: 4
       PotencyDivisor: 25
-  preventSwabbing: true # they're bees
 
 - type: seed
   id: everyspice
@@ -2658,6 +2758,26 @@
       Max: 10
       PotencyDivisor: 10
 
+
+- type: entity
+  id: EffectOrganTree
+  name: organ tree harvest
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomSpawner
+    chance: 1
+    offset: 0.1
+    prototypes:
+    - OrganHumanBrain
+    - OrganHumanEyes
+    - OrganHumanTongue
+    - OrganHumanAppendix
+    - OrganHumanEars
+    - OrganHumanLungs
+    - OrganHumanHeart
+    - OrganHumanStomach
+    - OrganHumanLiver
+    - OrganHumanKidneys
 
 - type: entity
   name: entity-name-FoodOrganTree
@@ -3808,6 +3928,21 @@
   - type: Tag
     tags:
     - Fruit
+
+- type: entity
+  parent: FoodProduceBase
+  id: Rose
+  name: entity-name-Rose
+  description: entity-description-Rose
+  components:
+  - type: Sprite
+    sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/rose.rsi
+    state: harvest
+  - type: Produce
+    seedId: rose
+  - type: Tag
+    tags:
+    - Flower
 
 - type: entity
   parent: FoodProduceBase

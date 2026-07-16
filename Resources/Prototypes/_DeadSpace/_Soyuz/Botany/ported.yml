@@ -3733,6 +3733,9 @@
   parent: FoodProduceBase
   id: MobTomatoKisser
   components:
+  - type: SolutionContainerManager
+    solutions:
+      food: {}
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/tomato.rsi
     state: produce
@@ -3746,6 +3749,9 @@
   parent: FoodProduceBase
   id: MobTomatoKisserFake
   components:
+  - type: SolutionContainerManager
+    solutions:
+      food: {}
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/tomato.rsi
     state: produce
@@ -3759,6 +3765,9 @@
   parent: FoodProduceBase
   id: Rose
   components:
+  - type: SolutionContainerManager
+    solutions:
+      food: {}
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/rose.rsi
     state: harvest
@@ -3772,6 +3781,9 @@
   parent: FoodProduceBase
   id: RoseBlack
   components:
+  - type: SolutionContainerManager
+    solutions:
+      food: {}
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/blackRose.rsi
     state: harvest
@@ -3805,6 +3817,9 @@
   parent: FoodProduceBase
   id: MaterialPom1
   components:
+  - type: SolutionContainerManager
+    solutions:
+      food: {}
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/pompombush.rsi
     state: harvest
@@ -3815,6 +3830,9 @@
   parent: FoodProduceBase
   id: GoldLeaf
   components:
+  - type: SolutionContainerManager
+    solutions:
+      food: {}
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/spesostree.rsi
     state: harvest

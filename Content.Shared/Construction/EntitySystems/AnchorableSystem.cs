@@ -5,6 +5,7 @@ using Content.Shared.Construction.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Database;
+using Content.Shared.DeadSpace._Soyuz.Construction;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Pulling.Components;
@@ -13,7 +14,6 @@ using Content.Shared.Popups;
 using Content.Shared.Tools.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
@@ -34,18 +34,13 @@ public sealed partial class AnchorableSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-
-    private EntityQuery<PhysicsComponent> _physicsQuery;
-    private EntityQuery<FixturesComponent> _fixturesQuery;
+    [Dependency] private readonly TileCenterCollisionSystem _tileCenterCollision = default!;
 
     public readonly ProtoId<TagPrototype> Unstackable = "Unstackable";
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
-        _fixturesQuery = GetEntityQuery<FixturesComponent>();
 
         SubscribeLocalEvent<AnchorableComponent, InteractUsingEvent>(OnInteractUsing,
             before: new[] { typeof(ItemSlotsSystem) }, after: new[] { typeof(SharedConstructionSystem) });
@@ -309,45 +304,8 @@ public sealed partial class AnchorableSystem : EntitySystem
     /// <param name="grid"></param>
     public bool TileFree(Entity<MapGridComponent> grid, Vector2i gridIndices, int collisionLayer = 0, int collisionMask = 0)
     {
-        var enumerator = _map.GetAnchoredEntitiesEnumerator(grid, grid.Comp, gridIndices);
-        // Kofeecheks tile-center collision fix: LicenseRef-Kofeecheks
-        var tileCenter = gridIndices + new System.Numerics.Vector2(0.5f, 0.5f);
-
-        while (enumerator.MoveNext(out var ent))
-        {
-            var other = ent.Value;
-
-            if (!_physicsQuery.TryGetComponent(other, out var body) ||
-                !body.CanCollide ||
-                !body.Hard)
-            {
-                continue;
-            }
-
-            if ((body.CollisionMask & collisionLayer) != 0x0 ||
-                (body.CollisionLayer & collisionMask) != 0x0)
-            {
-                if (!_fixturesQuery.TryGetComponent(other, out var fixtures))
-                    return false;
-
-                var xform = Transform(other);
-                var fixtureXform = new Transform(xform.LocalPosition, xform.LocalRotation);
-                foreach (var fixture in fixtures.Fixtures.Values)
-                {
-                    if (!fixture.Hard ||
-                        (fixture.CollisionMask & collisionLayer) == 0x0 &&
-                        (fixture.CollisionLayer & collisionMask) == 0x0)
-                    {
-                        continue;
-                    }
-
-                    if (fixture.Shape.ComputeAABB(fixtureXform, 0).Contains(tileCenter))
-                        return false;
-                }
-            }
-        }
-
-        return true;
+        // DS-14 Soyuz
+        return !_tileCenterCollision.IsBlocked(grid, gridIndices, collisionLayer, collisionMask);
     }
 
     [Obsolete("Use the Entity<MapGridComponent> version")]

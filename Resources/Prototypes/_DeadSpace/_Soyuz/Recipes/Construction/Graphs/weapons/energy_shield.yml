@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Kofeecheks
+# SPDX-License-Identifier: LicenseRef-Kofeecheks
+
 - type: constructionGraph
   id: EnergyShield
   start: brokenEnergyShield

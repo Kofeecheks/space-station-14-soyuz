@@ -402,6 +402,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
             _sprite.LayerSetVisible((entity.Owner, sprite), layerId, visible);
             _sprite.LayerSetScale((entity.Owner, sprite), layerId, markingLayer.Scale); // DS14
 
+            // DS-14 Soyuz
             if (markingPrototype.Shader != null)
                 sprite.LayerSetShader(layerId, markingPrototype.Shader);
 

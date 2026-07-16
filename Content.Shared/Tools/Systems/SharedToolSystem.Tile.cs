@@ -1,4 +1,5 @@
 using Content.Shared.Database;
+using Content.Shared.DeadSpace._Soyuz.Construction;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
@@ -7,17 +8,14 @@ using Content.Shared.Tools.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
-using Robust.Shared.Physics;
-using Robust.Shared.Physics.Components;
 using Robust.Shared.Utility;
-using System.Numerics;
 
 namespace Content.Shared.Tools.Systems;
 
 public abstract partial class SharedToolSystem
 {
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly TileCenterCollisionSystem _tileCenterCollision = default!;
 
     public void InitializeTile()
     {
@@ -51,7 +49,11 @@ public abstract partial class SharedToolSystem
 
         var tileRef = _maps.GetTileRef(gridUid, grid, args.GridTile);
         var coords = _maps.ToCoordinates(tileRef, grid);
-        if (comp.RequiresUnobstructed && IsTileCenterBlockedByImpassable(tileRef))
+        // DS-14 Soyuz
+        if (comp.RequiresUnobstructed && _tileCenterCollision.IsBlocked(
+                (gridUid, grid),
+                tileRef.GridIndices,
+                collisionMask: (int) CollisionGroup.Impassable))
             return;
 
         if (!TryDeconstructWithToolQualities(tileRef, tool.Qualities))
@@ -84,7 +86,11 @@ public abstract partial class SharedToolSystem
         if (string.IsNullOrWhiteSpace(tileDef.BaseTurf))
             return false;
 
-        if (comp.RequiresUnobstructed && IsTileCenterBlockedByImpassable(tileRef))
+        // DS-14 Soyuz
+        if (comp.RequiresUnobstructed && _tileCenterCollision.IsBlocked(
+                (gridUid, mapGrid),
+                tileRef.GridIndices,
+                collisionMask: (int) CollisionGroup.Impassable))
             return false;
 
         var coordinates = _maps.GridTileToLocal(gridUid, mapGrid, tileRef.GridIndices);
@@ -107,43 +113,4 @@ public abstract partial class SharedToolSystem
         return false;
     }
 
-    // Kofeecheks tile-center collision fix: LicenseRef-Kofeecheks
-    private bool IsTileCenterBlockedByImpassable(TileRef tileRef)
-    {
-        var tileCenter = tileRef.GridIndices + new Vector2(0.5f, 0.5f);
-        var entities = _lookup.GetEntitiesInTile(tileRef, LookupFlags.Uncontained);
-        var physicsQuery = GetEntityQuery<PhysicsComponent>();
-        var fixturesQuery = GetEntityQuery<FixturesComponent>();
-        var xformQuery = GetEntityQuery<TransformComponent>();
-
-        foreach (var ent in entities)
-        {
-            if (!physicsQuery.TryGetComponent(ent, out var physics) ||
-                physics.BodyType != BodyType.Static ||
-                !physics.CanCollide ||
-                !physics.Hard ||
-                (physics.CollisionLayer & (int) CollisionGroup.Impassable) == 0)
-            {
-                continue;
-            }
-
-            if (!fixturesQuery.TryGetComponent(ent, out var fixtures) ||
-                !xformQuery.TryGetComponent(ent, out var xform))
-            {
-                return true;
-            }
-
-            var fixtureXform = new Transform(xform.LocalPosition, xform.LocalRotation);
-            foreach (var fixture in fixtures.Fixtures.Values)
-            {
-                if (!fixture.Hard || (fixture.CollisionLayer & (int) CollisionGroup.Impassable) == 0)
-                    continue;
-
-                if (fixture.Shape.ComputeAABB(fixtureXform, 0).Contains(tileCenter))
-                    return true;
-            }
-        }
-
-        return false;
-    }
 }

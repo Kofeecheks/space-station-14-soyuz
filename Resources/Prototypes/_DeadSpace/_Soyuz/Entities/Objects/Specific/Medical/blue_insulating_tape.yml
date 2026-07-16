@@ -12,13 +12,13 @@
     tags:
     - BlueInsulatingTape
   - type: Sprite
-    sprite: _DeadSpace/Objects/Specific/Medical/medical.rsi
+    sprite: _DeadSpace/_Soyuz/Objects/Specific/Medical/blue_insulating_tape.rsi
     state: insulating_tape_blue-3
     layers:
     - state: insulating_tape_blue-3
       map: ["base"]
   - type: Item
-    sprite: _DeadSpace/Objects/Specific/Medical/medical.rsi
+    sprite: _DeadSpace/_Soyuz/Objects/Specific/Medical/blue_insulating_tape.rsi
     heldPrefix: insulating_tape_blue
   - type: WindowRepairTape
   - type: Healing

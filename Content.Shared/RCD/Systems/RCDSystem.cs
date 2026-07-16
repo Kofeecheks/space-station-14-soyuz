@@ -2,6 +2,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Construction;
 using Content.Shared.Database;
+using Content.Shared.DeadSpace._Soyuz.Construction;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
@@ -23,7 +24,6 @@ using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using System.Linq;
-using System.Numerics;
 
 namespace Content.Shared.RCD.Systems;
 
@@ -46,6 +46,7 @@ public sealed class RCDSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TagSystem _tags = default!;
+    [Dependency] private readonly TileCenterCollisionSystem _tileCenterCollision = default!;
 
     private readonly int _instantConstructionDelay = 0;
     private readonly EntProtoId _instantConstructionFx = "EffectRCDConstruct0";
@@ -549,8 +550,12 @@ public sealed class RCDSystem : EntitySystem
                         if (!DoesCustomBoundsIntersectWithFixture(prototype.CollisionPolygon, component.ConstructionTransform, ent, fixture))
                             continue;
                     }
-                    // Kofeecheks tile-center collision fix: LicenseRef-Kofeecheks
-                    else if (!DoesFixtureCoverTileCenter(ent, fixture, position))
+                    // DS-14 Soyuz
+                    else if (!_tileCenterCollision.FixtureContainsTileCenter(
+                                 (gridUid, mapGrid),
+                                 position,
+                                 ent,
+                                 fixture))
                     {
                         continue;
                     }
@@ -582,7 +587,12 @@ public sealed class RCDSystem : EntitySystem
             }
 
             // The tile has a structure sitting on it
-            if (IsTileCenterBlockedByImpassable(tile))
+            // DS-14 Soyuz
+            if (TryComp<MapGridComponent>(tile.GridUid, out var grid) &&
+                _tileCenterCollision.IsBlocked(
+                    (tile.GridUid, grid),
+                    tile.GridIndices,
+                    collisionMask: (int) CollisionGroup.Impassable))
             {
                 if (popMsgs)
                     _popup.PopupClient(Loc.GetString("rcd-component-tile-obstructed-message"), uid, user);
@@ -690,52 +700,6 @@ public sealed class RCDSystem : EntitySystem
         var entXform = new Transform(new(), entXformComp.LocalRotation);
 
         return boundingPolygon.ComputeAABB(boundingTransform, 0).Intersects(fixture.Shape.ComputeAABB(entXform, 0));
-    }
-
-    // Kofeecheks tile-center collision fix: LicenseRef-Kofeecheks
-    private bool DoesFixtureCoverTileCenter(EntityUid fixtureOwner, Fixture fixture, Vector2i position)
-    {
-        var tileCenter = position + new Vector2(0.5f, 0.5f);
-        var xform = Transform(fixtureOwner);
-        var fixtureXform = new Transform(xform.LocalPosition, xform.LocalRotation);
-        return fixture.Shape.ComputeAABB(fixtureXform, 0).Contains(tileCenter);
-    }
-
-    // Kofeecheks tile-center collision fix: LicenseRef-Kofeecheks
-    private bool IsTileCenterBlockedByImpassable(TileRef tile)
-    {
-        var tileCenter = tile.GridIndices + new Vector2(0.5f, 0.5f);
-
-        _intersectingEntities.Clear();
-        _lookup.GetEntitiesInTile(tile, _intersectingEntities, LookupFlags.Uncontained);
-
-        foreach (var ent in _intersectingEntities)
-        {
-            if (!TryComp<PhysicsComponent>(ent, out var physics) ||
-                physics.BodyType != BodyType.Static ||
-                !physics.CanCollide ||
-                !physics.Hard ||
-                (physics.CollisionLayer & (int) CollisionGroup.Impassable) == 0)
-            {
-                continue;
-            }
-
-            if (!TryComp<FixturesComponent>(ent, out var fixtures))
-                return true;
-
-            var xform = Transform(ent);
-            var fixtureXform = new Transform(xform.LocalPosition, xform.LocalRotation);
-            foreach (var fixture in fixtures.Fixtures.Values)
-            {
-                if (!fixture.Hard || (fixture.CollisionLayer & (int) CollisionGroup.Impassable) == 0)
-                    continue;
-
-                if (fixture.Shape.ComputeAABB(fixtureXform, 0).Contains(tileCenter))
-                    return true;
-            }
-        }
-
-        return false;
     }
 
     #endregion

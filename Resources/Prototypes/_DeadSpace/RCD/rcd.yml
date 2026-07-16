@@ -11,6 +11,7 @@
   rotation: Fixed
   fx: EffectRCDConstruct2
 
+# DS-14 Soyuz
 - type: rcd
   id: WallMiningCE
   category: WallsAndFlooring
@@ -79,6 +80,7 @@
   rotation: User
   fx: EffectRCDConstruct3
 
+# DS-14 Soyuz
 - type: rcd
   id: MiningWindowCE
   category: WindowsAndGrilles

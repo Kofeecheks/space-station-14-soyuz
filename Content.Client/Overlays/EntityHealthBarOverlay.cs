@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client.DeadSpace._Soyuz.Overlays;
 using Content.Client.StatusIcon;
 using Content.Client.UserInterface.Systems;
 using Content.Shared.Damage.Components;
@@ -54,12 +55,9 @@ public sealed class EntityHealthBarOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        // Kofeecheks secondary-viewport HUD fix: LicenseRef-Kofeecheks
-        if (!_entManager.TryGetComponent(_playerManager.LocalSession?.AttachedEntity, out EyeComponent? eye) ||
-            args.Viewport.Eye != eye.Eye)
-        {
+        // DS-14 Soyuz
+        if (!SoyuzOverlayViewport.IsPrimary(args, _entManager, _playerManager))
             return;
-        }
 
         var handle = args.WorldHandle;
         var rotation = args.Viewport.Eye?.Rotation ?? Angle.Zero;

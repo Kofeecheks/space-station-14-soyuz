@@ -185,6 +185,7 @@ public sealed partial class TTSSystem : EntitySystem
 
         if (soundData is null) return;
 
+        // DS-14 Soyuz
         foreach (var session in recipients)
         {
             if (!understanding.Contains(session))

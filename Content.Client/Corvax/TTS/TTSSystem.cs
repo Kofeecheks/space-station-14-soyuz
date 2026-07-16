@@ -160,6 +160,7 @@ public sealed class TTSSystem : EntitySystem
             _contentRoot.RemoveFile(filePath.Value);
     }
 
+    // DS-14 Soyuz
     private float AdjustVolume(bool isWhisper, bool isRadio, float volumeMultiplier)
     {
         var volume = MinimalVolume + SharedAudioSystem.GainToVolume(_volume);
@@ -179,6 +180,7 @@ public sealed class TTSSystem : EntitySystem
         return volume;
     }
 
+    // DS-14 Soyuz
     private float AdjustDistance(bool isWhisper, float distanceMultiplier)
     {
         var baseDistance = isWhisper ? SharedChatSystem.WhisperMuffledRange : SharedChatSystem.VoiceRange;

@@ -1,3 +1,4 @@
+using Content.Client.DeadSpace._Soyuz.Overlays;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
@@ -26,9 +27,8 @@ public sealed partial class NoirOverlay : Overlay
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
     {
-        // Kofeecheks secondary-viewport HUD fix: LicenseRef-Kofeecheks
-        return _entityManager.TryGetComponent(_playerManager.LocalSession?.AttachedEntity, out EyeComponent? eye) &&
-               args.Viewport.Eye == eye.Eye;
+        // DS-14 Soyuz
+        return SoyuzOverlayViewport.IsPrimary(args, _entityManager, _playerManager);
     }
 
     protected override void Draw(in OverlayDrawArgs args)

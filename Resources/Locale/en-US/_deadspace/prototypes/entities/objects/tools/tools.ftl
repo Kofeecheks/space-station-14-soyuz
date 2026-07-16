@@ -1,3 +1,4 @@
+# DS-14 Soyuz
 ent-RCDCE = chief engineer's RCD
     .desc = An upgraded RCD that uses half as many charges for construction and regenerates one charge every 20 seconds.
 ent-SyndicateWelderExperimental = кроваво-красный сварочный аппарат

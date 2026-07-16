@@ -4,6 +4,6 @@
 - type: stack
   id: BlueInsulatingTape
   name: blue-insulating-tape-stack
-  icon: { sprite: _DeadSpace/Objects/Specific/Medical/medical.rsi, state: insulating_tape_blue-10 }
+  icon: { sprite: _DeadSpace/_Soyuz/Objects/Specific/Medical/blue_insulating_tape.rsi, state: insulating_tape_blue-10 }
   spawn: BlueInsulatingTape
   maxCount: 10

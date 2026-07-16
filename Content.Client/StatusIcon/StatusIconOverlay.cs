@@ -1,3 +1,4 @@
+using Content.Client.DeadSpace._Soyuz.Overlays;
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
 using Robust.Client.GameObjects;
@@ -38,12 +39,9 @@ public sealed class StatusIconOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        // Kofeecheks secondary-viewport HUD fix: LicenseRef-Kofeecheks
-        if (!_entity.TryGetComponent(_playerManager.LocalSession?.AttachedEntity, out EyeComponent? eye) ||
-            args.Viewport.Eye != eye.Eye)
-        {
+        // DS-14 Soyuz
+        if (!SoyuzOverlayViewport.IsPrimary(args, _entity, _playerManager))
             return;
-        }
 
         var handle = args.WorldHandle;
 

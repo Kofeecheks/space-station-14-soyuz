@@ -1,4 +1,5 @@
 using Content.Client.Atmos.EntitySystems;
+using Content.Client.DeadSpace._Soyuz.Overlays;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Atmos.EntitySystems;
@@ -145,12 +146,9 @@ public sealed class GasTileDangerousTemperatureOverlay : Overlay
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
     {
-        // Kofeecheks secondary-viewport HUD fix: LicenseRef-Kofeecheks
-        if (!_entManager.TryGetComponent(_playerManager.LocalSession?.AttachedEntity, out EyeComponent? eye) ||
-            args.Viewport.Eye != eye.Eye)
-        {
+        // DS-14 Soyuz
+        if (!SoyuzOverlayViewport.IsPrimary(args, _entManager, _playerManager))
             return false;
-        }
 
         if (args.MapId == MapId.Nullspace)
             return false;

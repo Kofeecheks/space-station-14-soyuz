@@ -3,21 +3,22 @@
   id: Canisters
   defaultStyle: storage
   styles:
+    # DS-14 Soyuz
     air: AirCanister
     ammonia: AmmoniaCanister
-    brizidium: BrizidiumCanister # Kofeecheks QoL: LicenseRef-Kofeecheks
+    brizidium: BrizidiumCanister
     carbon-dioxide: CarbonDioxideCanister
     frezon: FrezonCanister
-    fixirium: FixiriumCanister # Kofeecheks QoL: LicenseRef-Kofeecheks
-    hilium: HiliumCanister # Kofeecheks QoL: LicenseRef-Kofeecheks
-    hydrogen: HydrogenCanister # Kofeecheks QoL: LicenseRef-Kofeecheks
-    iprit: IpritCanister # Kofeecheks QoL: LicenseRef-Kofeecheks
+    fixirium: FixiriumCanister
+    hilium: HiliumCanister
+    hydrogen: HydrogenCanister
+    iprit: IpritCanister
     liquid-carbon-dioxide: LiquidCarbonDioxideCanister
     liquid-nitrogen: LiquidNitrogenCanister
     liquid-oxygen: LiquidOxygenCanister
     nitrogen: NitrogenCanister
-    nitriatium: NitriatiumCanister # Kofeecheks QoL: LicenseRef-Kofeecheks
-    nitryl: NitrylCanister # Kofeecheks QoL: LicenseRef-Kofeecheks
+    nitriatium: NitriatiumCanister
+    nitryl: NitrylCanister
     nitrous-oxide: NitrousOxideCanister
     oxygen: OxygenCanister
     plasma: PlasmaCanister

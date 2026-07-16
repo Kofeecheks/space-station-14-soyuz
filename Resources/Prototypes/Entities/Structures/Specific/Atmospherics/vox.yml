@@ -15,8 +15,8 @@
       Ammonia: stationAmmonia
       NitrousOxide: stationNO
       Frezon: danger
+      # DS-14 Soyuz
       InfectionDeadSpace: stationInfectionDeadSpace
-      # Kofeecheks gases: LicenseRef-Kofeecheks
       Nitryl: stationNitryl
       Fixirium: stationFixirium
       Hydrogen: stationHydrogen

@@ -276,10 +276,8 @@
     state: produce
 
 - type: entity
-  name: entity-name-FoodLemo
   parent: FoodProduceBase
   id: FoodLemo
-  description: entity-description-FoodLemo
   components:
   - type: FlavorProfile
     flavors:
@@ -308,10 +306,8 @@
     - Lemo
 
 - type: entity
-  name: entity-name-FoodLemoSlice
   parent: ProduceSliceBase
   id: FoodLemoSlice
-  description: entity-description-FoodLemoSlice
   components:
   - type: FlavorProfile
     flavors:
@@ -336,8 +332,6 @@
 - type: entity
   parent: FoodProduceBase
   id: FoodCoconut
-  name: entity-name-FoodCoconut
-  description: entity-description-FoodCoconut
   components:
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/coconut.rsi
@@ -386,10 +380,8 @@
           Quantity: 10
 
 - type: entity
-  name: entity-name-FoodCoconutSlice
   parent: ProduceSliceBase
   id: FoodCoconutSlice
-  description: entity-description-FoodCoconutSlice
   components:
   - type: FlavorProfile
     flavors:
@@ -414,8 +406,6 @@
 - type: entity
   parent: FoodProduceBase
   id: FoodCoconutBees
-  name: entity-name-FoodCoconutBees
-  description: entity-description-FoodCoconutBees
   components:
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/coconest.rsi
@@ -480,10 +470,8 @@
     solution: food
 
 - type: entity
-  name: entity-name-FoodCoconutBeeSlice
   parent: ProduceSliceBase
   id: FoodCoconutBeeSlice
-  description: entity-description-FoodCoconutBeeSlice
   components:
   - type: FlavorProfile
     flavors:
@@ -509,8 +497,6 @@
 - type: entity
   parent: FoodProduceBase
   id: FoodCoconutJoke
-  name: entity-name-FoodCoconutJoke
-  description: entity-description-FoodCoconutJoke
   categories: [ DoNotMap ]
   components:
   - type: Sprite
@@ -560,10 +546,8 @@
           Quantity: 10
 
 - type: entity
-  name: entity-name-FoodHops
   parent: FoodProduceBase
   id: FoodHops
-  description: entity-description-FoodHops
   components:
   - type: FlavorProfile
     flavors:
@@ -592,10 +576,8 @@
     - Fruit
 
 - type: entity
-  name: entity-name-FoodButterflyOrchid
   parent: FoodProduceBase
   id: FoodButterflyOrchid
-  description: entity-description-FoodButterflyOrchid
   components:
   - type: Clothing
     slots:
@@ -628,10 +610,8 @@
     - Flower
 
 - type: entity
-  name: entity-name-FoodBiggerflyOrchid
   parent: FoodProduceBase
   id: FoodBiggerflyOrchid
-  description: entity-description-FoodBiggerflyOrchid
   components:
   - type: FlavorProfile
     flavors:
@@ -660,10 +640,8 @@
     - Flower
 
 - type: entity
-  name: entity-name-FoodFloatingFlora
   parent: [FoodProduceBase, BaseDeployFoldable]
   id: FoodFloatingFlora
-  description: entity-description-FoodFloatingFlora
   components:
   - type: FlavorProfile
     flavors:
@@ -714,7 +692,6 @@
 
 # flora color variants
 - type: entity
-  name: entity-name-FoodFloatingFloraPink
   parent: [FoodFloatingFlora]
   id: FoodFloatingFloraPink
   components:
@@ -729,7 +706,6 @@
       visible: false
 
 - type: entity
-  name: entity-name-FoodFloatingFloraOrange
   parent: [FoodFloatingFlora]
   id: FoodFloatingFloraOrange
   components:
@@ -744,7 +720,6 @@
       visible: false
 
 - type: entity
-  name: entity-name-FoodFloatingFloraBlue
   parent: [FoodFloatingFlora]
   id: FoodFloatingFloraBlue
   components:
@@ -760,7 +735,6 @@
 
 
 - type: entity
-  name: entity-name-LeavesGreenMarijuana
   parent: LeavesCannabis
   id: LeavesGreenMarijuana
   components:
@@ -770,8 +744,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-GreenMarijuanaSeeds
-  description: entity-description-GreenMarijuanaSeeds
   id: GreenMarijuanaSeeds
   components:
   - type: Seed
@@ -781,8 +753,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-LemoSeeds
-  description: entity-description-LemoSeeds
   id: LemoSeeds
   components:
   - type: Seed
@@ -792,7 +762,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-KisserTomatoSeeds
   id: KisserTomatoSeeds
   components:
   - type: Seed
@@ -802,7 +771,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-KisserTomatoFakeSeeds
   suffix: Syndicate
   id: KisserTomatoFakeSeeds
   components:
@@ -813,8 +781,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-RoseSeeds
-  description: entity-description-RoseSeeds
   id: RoseSeeds
   components:
     - type: Seed
@@ -824,8 +790,6 @@
 
 - type: entity
   parent: [SeedBase, BaseMajorContraband]
-  name: entity-name-BlackRoseSeeds
-  description: entity-description-BlackRoseSeeds
   id: BlackRoseSeeds
   components:
     - type: Seed
@@ -835,8 +799,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-CoconutSeeds
-  description: entity-description-CoconutSeeds
   id: CoconutSeeds
   components:
     - type: Seed
@@ -846,8 +808,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-CoconutBeesSeeds
-  description: entity-description-CoconutBeesSeeds
   id: CoconutBeesSeeds
   components:
     - type: Seed
@@ -857,7 +817,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-HopsSeeds
   id: HopsSeeds
   components:
   - type: Seed
@@ -867,7 +826,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-HoPsSeeds
   id: HoPsSeeds # really riding on yaml being case sensitive here
   components:
   - type: Seed
@@ -877,7 +835,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-AgentGrainSeeds
   id: AgentGrainSeeds
   components:
   - type: Seed
@@ -887,7 +844,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-ButterflyOrchidSeeds
   id: ButterflyOrchidSeeds
   components:
     - type: Seed
@@ -897,7 +853,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-BiggerflyOrchidSeeds
   id: BiggerflyOrchidSeeds
   components:
     - type: Seed
@@ -907,7 +862,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-ButterOrchidSeeds
   id: ButterOrchidSeeds
   components:
     - type: Seed
@@ -917,7 +871,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-FloatingFloraSeeds
   id: FloatingFloraSeeds
   components:
     - type: Seed
@@ -927,7 +880,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-PompomBushSeeds
   id: PompomBushSeeds
   components:
     - type: Seed
@@ -1350,10 +1302,8 @@
 
 
 - type: entity
-  name: entity-name-FoodAvocado
   parent: FoodProduceBase
   id: FoodAvocado
-  description: entity-description-FoodAvocado
   components:
   - type: FlavorProfile
     flavors:
@@ -1388,10 +1338,8 @@
       - Fruit
 
 - type: entity
-  name: entity-name-FoodAvocadoSlice
   parent: ProduceSliceBase
   id: FoodAvocadoSlice
-  description: entity-description-FoodAvocadoSlice
   components:
   - type: FlavorProfile
     flavors:
@@ -1424,10 +1372,8 @@
       Burger: Avocado
 
 - type: entity
-  name: entity-name-FoodCucumber
   parent: FoodProduceBase
   id: FoodCucumber
-  description: entity-description-FoodCucumber
   components:
   - type: FlavorProfile
     flavors:
@@ -1462,10 +1408,8 @@
       - Vegetable
 
 - type: entity
-  name: entity-name-FoodCucumberSlice
   parent: ProduceSliceBase
   id: FoodCucumberSlice
-  description: entity-description-FoodCucumberSlice
   components:
   - type: FlavorProfile
     flavors:
@@ -1498,10 +1442,8 @@
       Burger: Cucumber
 
 - type: entity
-  name: entity-name-FoodPickle
   parent: FoodProduceBase
   id: FoodPickle
-  description: entity-description-FoodPickle
   components:
   - type: FlavorProfile
     flavors:
@@ -1536,10 +1478,8 @@
       - Vegetable
 
 - type: entity
-  name: entity-name-FoodPickleSlice
   parent: ProduceSliceBase
   id: FoodPickleSlice
-  description: entity-description-FoodPickleSlice
   components:
   - type: FlavorProfile
     flavors:
@@ -1574,10 +1514,8 @@
       Burger: Pickle
 
 - type: entity
-  name: entity-name-FoodHoneyComb
   parent: FoodProduceBase
   id: FoodHoneyComb
-  description: entity-description-FoodHoneyComb
   components:
   - type: FlavorProfile
     flavors:
@@ -1608,10 +1546,8 @@
       Taco: Honeycomb
 
 - type: entity
-  name: entity-name-FoodEveryspice
   parent: FoodProduceBase
   id: FoodEveryspice
-  description: entity-description-FoodEveryspice
   components:
   - type: FlavorProfile
     flavors:
@@ -1638,10 +1574,8 @@
     defaultTarget: FoodEveryspiceRoasted
 
 - type: entity
-  name: entity-name-FoodEveryspiceRoasted
   parent: FoodProduceBase
   id: FoodEveryspiceRoasted
-  description: entity-description-FoodEveryspiceRoasted
   components:
   - type: FlavorProfile
     flavors:
@@ -1671,10 +1605,8 @@
       Taco: Everyspice
 
 - type: entity
-  name: entity-name-FoodMonkanana
   parent: FoodProduceBase
   id: FoodMonkanana
-  description: entity-description-FoodMonkanana
   components:
   - type: FlavorProfile
     flavors:
@@ -1705,10 +1637,8 @@
       Taco: Monkanana
 
 - type: entity
-  name: entity-name-FoodPomegranate
   parent: FoodProduceBase
   id: FoodPomegranate
-  description: entity-description-FoodPomegranate
   components:
   - type: FlavorProfile
     flavors:
@@ -1740,10 +1670,8 @@
       Taco: Pomegranate
 
 - type: entity
-  name: entity-name-FoodGranatapfel
   parent: [FoodProduceBase, ItemHeftyBase]
   id: FoodGranatapfel
-  description: entity-description-FoodGranatapfel
   components:
     - type: FlavorProfile
       flavors:
@@ -1809,8 +1737,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-SpesosTreeSeeds
-  description: entity-description-SpesosTreeSeeds
   id: SpesosTreeSeeds
   components:
     - type: Seed
@@ -1820,8 +1746,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-CoffeeSeeds
-  description: entity-description-CoffeeSeeds
   id: CoffeeSeeds
   components:
     - type: Seed
@@ -1831,8 +1755,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-AvocadoSeeds
-  description: entity-description-AvocadoSeeds
   id: AvocadoSeeds
   components:
     - type: Seed
@@ -1842,8 +1764,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-CucumberSeeds
-  description: entity-description-CucumberSeeds
   id: CucumberSeeds
   components:
     - type: Seed
@@ -1853,14 +1773,14 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-BeeSeeds
-  description: entity-description-BeeSeeds
   id: BeeSeeds
   components:
     - type: Seed
       seedId: bees
     - type: Sprite
       sprite: Objects/Specific/Hydroponics/tomato.rsi
+    - type: StaticPrice
+      price: 50
     - type: Damageable
       damageContainer: Inorganic
       damageModifierSet: Glass
@@ -1894,8 +1814,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-EveryspiceSeeds
-  description: entity-description-EveryspiceSeeds
   id: EveryspiceSeeds
   components:
     - type: Seed
@@ -1905,8 +1823,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-MonkananaSeeds
-  description: entity-description-MonkananaSeeds
   id: MonkananaSeeds
   components:
     - type: Seed
@@ -1917,8 +1833,6 @@
 - type: entity
   parent: SeedBase
   id: NFGlowshroomSeeds
-  name: entity-name-NFGlowshroomSeeds
-  description: entity-description-NFGlowshroomSeeds
   components:
     - type: Seed
       seedId: nfglowshroom
@@ -1932,7 +1846,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-PomegranateSeeds
   id: PomegranateSeeds
   components:
     - type: Seed
@@ -1942,7 +1855,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-GranatapfelSeeds
   id: GranatapfelSeeds
   components:
     - type: Seed
@@ -2211,10 +2123,8 @@
 
 
 - type: entity
-  name: entity-name-FoodCrystalThistle
   parent: FoodProduceBase
   id: FoodCrystalThistle
-  description: entity-description-FoodCrystalThistle
   components:
   - type: FlavorProfile
     flavors:
@@ -2248,10 +2158,8 @@
     state: harvest
 
 - type: entity
-  name: entity-name-FoodGhostPepper
   parent: FoodProduceBase
   id: FoodGhostPepper
-  description: entity-description-FoodGhostPepper
   components:
   - type: FlavorProfile
     flavors:
@@ -2295,10 +2203,8 @@
   - Vegetable
 
 - type: entity
-  name: entity-name-FoodCosmicRevenant
   parent: FoodProduceBase
   id: FoodCosmicRevenant
-  description: entity-description-FoodCosmicRevenant
   components:
   - type: FlavorProfile
     flavors:
@@ -2340,10 +2246,8 @@
   - Vegetable
 
 - type: entity
-  name: entity-name-FoodAmbrosiaNobilis
   parent: FoodProduceBase
   id: FoodAmbrosiaNobilis
-  description: entity-description-FoodAmbrosiaNobilis
   components:
   - type: FlavorProfile
     flavors:
@@ -2383,8 +2287,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-CrystalThistleSeeds
-  description: entity-description-CrystalThistleSeeds
   id: CrystalThistleSeeds
   components:
     - type: Seed
@@ -2394,8 +2296,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-GhostPepperSeeds
-  description: entity-description-GhostPepperSeeds
   id: GhostPepperSeeds
   components:
     - type: Seed
@@ -2405,8 +2305,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-CosmicRevenantSeeds
-  description: entity-description-CosmicRevenantSeeds
   id: CosmicRevenantSeeds
   components:
     - type: Seed
@@ -2416,8 +2314,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-AmbrosiaNobilis
-  description: entity-description-AmbrosiaNobilis
   id: AmbrosiaNobilis
   components:
     - type: Seed
@@ -2560,10 +2456,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: entity-name-FoodStrangeBerries
   parent: FoodProduceBase
   id: FoodStrangeBerries
-  description: entity-description-FoodStrangeBerries
   components:
   - type: FlavorProfile
     flavors:
@@ -2589,8 +2483,6 @@
         Quantity: 5
 
 - type: entity
-  name: entity-name-Nevcotta
-  description: entity-description-Nevcotta
   id: Nevcotta
   parent: ProduceBase
   components:
@@ -2605,8 +2497,6 @@
     spawnCount: 2
 
 - type: entity
-  name: entity-name-NevcottaBark
-  description: entity-description-NevcottaBark
   id: NevcottaBark
   parent: BaseItem
   components:
@@ -2627,10 +2517,8 @@
 
 
 - type: entity
-  name: entity-name-FoodBluespaceTomato
   parent: FoodBlueTomato
   id: FoodBluespaceTomato
-  description: entity-description-FoodBluespaceTomato
   components:
   - type: SolutionContainerManager
     solutions:
@@ -2677,7 +2565,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-StrangeBerrySeeds
   id: StrangeBerrySeeds
   components:
     - type: Seed
@@ -2687,7 +2574,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-BluespaceTomatoSeeds
   id: BluespaceTomatoSeeds
   components:
   - type: Seed
@@ -2776,8 +2662,6 @@
     - OrganHumanKidneys
 
 - type: entity
-  name: entity-name-FoodOrganTree
-  description: entity-description-FoodOrganTree
   parent: FoodProduceBase
   id: FoodOrganTree
   components:
@@ -2809,7 +2693,6 @@
 - type: entity
   id: TrashMimanaPeelStealthy
   parent: TrashMimanaPeel
-  name: entity-name-TrashMimanaPeelStealthy
   suffix: Stealthy
   components:
   - type: Stealth
@@ -2820,10 +2703,8 @@
     movementVisibilityRate: 0.50
 
 - type: entity
-  name: entity-name-FoodEvilApple
   parent: FoodProduceBase
   id: FoodEvilApple
-  description: entity-description-FoodEvilApple
   components:
     - type: FlavorProfile
       flavors:
@@ -2846,10 +2727,8 @@
         - Fruit
 
 - type: entity
-  name: entity-name-FoodResinfera
   parent: FoodProduceBase
   id: FoodResinfera
-  description: entity-description-FoodResinfera
   components:
     - type: FlavorProfile
       flavors:
@@ -2911,7 +2790,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-OrganTreeSeeds
   id: OrganTreeSeeds
   components:
   - type: Seed
@@ -2922,7 +2800,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-EvilAppleSeeds
   id: EvilAppleSeeds
   components:
     - type: Seed
@@ -2932,7 +2809,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-ResinferaSeeds
   id: ResinferaSeeds
   components:
     - type: Seed
@@ -3018,10 +2894,8 @@
 
 
 - type: entity
-  name: entity-name-RMCFoodMango
   parent: FoodProduceBase
   id: RMCFoodMango
-  description: entity-description-RMCFoodMango
   components:
   - type: FlavorProfile
     flavors:
@@ -3058,7 +2932,6 @@
 
 - type: entity
   parent: SeedBase
-  name: entity-name-RMCMangoSeeds
   id: RMCMangoSeeds
   components:
     - type: Seed
@@ -3448,7 +3321,6 @@
 - type: entity
   parent: SeedBase
   id: ExplosiveBananaSeeds
-  name: entity-name-ExplosiveBananaSeeds
   components:
   - type: Seed
     seedId: ExplosiveBanana
@@ -3458,7 +3330,6 @@
 - type: entity
   parent: SeedBase
   id: CoffeeArabicaSeeds
-  name: entity-name-CoffeeArabicaSeeds
   components:
   - type: Seed
     seedId: CoffeeArabica
@@ -3468,7 +3339,6 @@
 - type: entity
   parent: SeedBase
   id: CoffeeRobustSeeds
-  name: entity-name-CoffeeRobustSeeds
   components:
   - type: Seed
     seedId: CoffeeRobust
@@ -3478,7 +3348,6 @@
 - type: entity
   parent: SeedBase
   id: GeraniumSeeds
-  name: entity-name-GeraniumSeeds
   components:
   - type: Seed
     seedId: Geranium
@@ -3488,7 +3357,6 @@
 - type: entity
   parent: SeedBase
   id: PlastSteelcapSeeds
-  name: entity-name-PlastSteelcapSeeds
   components:
   - type: Seed
     seedId: plaststeelcap
@@ -3498,7 +3366,6 @@
 - type: entity
   parent: SeedBase
   id: GlasscapSeeds
-  name: entity-name-GlasscapSeeds
   components:
   - type: Seed
     seedId: glasscap
@@ -3508,7 +3375,6 @@
 - type: entity
   parent: SeedBase
   id: CannabisVitaSeeds
-  name: entity-name-CannabisVitaSeeds
   components:
   - type: Seed
     seedId: CannabisVita
@@ -3518,7 +3384,6 @@
 - type: entity
   parent: SeedBase
   id: BarrelmelonSeeds
-  name: entity-name-BarrelmelonSeeds
   components:
   - type: Seed
     seedId: Barrelmelon
@@ -3528,7 +3393,6 @@
 - type: entity
   parent: SeedBase
   id: LanternfruitSeeds
-  name: entity-name-LanternfruitSeeds
   components:
   - type: Seed
     seedId: Lanternfruit
@@ -3538,7 +3402,6 @@
 - type: entity
   parent: SeedBase
   id: RedroseSeeds
-  name: entity-name-RedroseSeeds
   components:
   - type: Seed
     seedId: Redrose
@@ -3548,7 +3411,6 @@
 - type: entity
   parent: SeedBase
   id: SnapcornSeeds
-  name: entity-name-SnapcornSeeds
   components:
   - type: Seed
     seedId: Snapcorn
@@ -3558,7 +3420,6 @@
 - type: entity
   parent: SeedBase
   id: WhiteroseSeeds
-  name: entity-name-WhiteroseSeeds
   components:
   - type: Seed
     seedId: Whiterose
@@ -3568,7 +3429,6 @@
 - type: entity
   parent: SeedBase
   id: WhiteLilySeeds
-  name: entity-name-WhiteLilySeeds
   components:
   - type: Seed
     seedId: WhiteLily
@@ -3578,8 +3438,6 @@
 - type: entity
   parent: FoodProduceBase
   id: ExplosiveBanana
-  name: entity-name-ExplosiveBanana
-  description: entity-description-ExplosiveBanana
   components:
   - type: Damageable
     damageContainer: Biological
@@ -3609,8 +3467,6 @@
 - type: entity
   parent: FoodProduceBase
   id: FoodCoffeeArabica
-  name: entity-name-FoodCoffeeArabica
-  description: entity-description-FoodCoffeeArabica
   components:
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/wheat.rsi
@@ -3633,8 +3489,6 @@
 - type: entity
   parent: FoodProduceBase
   id: FoodCoffeeRobust
-  name: entity-name-FoodCoffeeRobust
-  description: entity-description-FoodCoffeeRobust
   components:
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/wheat.rsi
@@ -3657,8 +3511,6 @@
 - type: entity
   parent: FoodProduceBase
   id: FoodGeranium
-  name: entity-name-FoodGeranium
-  description: entity-description-FoodGeranium
   components:
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/geranium.rsi
@@ -3681,8 +3533,6 @@
 - type: entity
   parent: ProduceBase
   id: PlastSteelLog
-  name: entity-name-PlastSteelLog
-  description: entity-description-PlastSteelLog
   components:
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/plaststeelcap.rsi
@@ -3704,8 +3554,6 @@
 - type: entity
   parent: ProduceBase
   id: GlassLog
-  name: entity-name-GlassLog
-  description: entity-description-GlassLog
   components:
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/glasscap.rsi
@@ -3727,8 +3575,6 @@
 - type: entity
   parent: FoodProduceBase
   id: CannabisVitaLeaves
-  name: entity-name-CannabisVitaLeaves
-  description: entity-description-CannabisVitaLeaves
   components:
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/cannabis_vita.rsi
@@ -3751,8 +3597,6 @@
 - type: entity
   parent: FoodProduceBase
   id: FoodBarrelmelon
-  name: entity-name-FoodBarrelmelon
-  description: entity-description-FoodBarrelmelon
   components:
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/barrelmelon.rsi
@@ -3775,8 +3619,6 @@
 - type: entity
   parent: FoodProduceBase
   id: FoodLanternfruit
-  name: entity-name-FoodLanternfruit
-  description: entity-description-FoodLanternfruit
   components:
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/lanternfruit.rsi
@@ -3799,8 +3641,6 @@
 - type: entity
   parent: FoodProduceBase
   id: FoodRedrose
-  name: entity-name-FoodRedrose
-  description: entity-description-FoodRedrose
   components:
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/redrose.rsi
@@ -3823,8 +3663,6 @@
 - type: entity
   parent: FoodProduceBase
   id: FoodSnapcorn
-  name: entity-name-FoodSnapcorn
-  description: entity-description-FoodSnapcorn
   components:
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/snapcorn.rsi
@@ -3847,8 +3685,6 @@
 - type: entity
   parent: FoodProduceBase
   id: FoodWhiterose
-  name: entity-name-FoodWhiterose
-  description: entity-description-FoodWhiterose
   components:
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/whiterose.rsi
@@ -3871,8 +3707,6 @@
 - type: entity
   parent: FoodProduceBase
   id: FoodWhiteLily
-  name: entity-name-FoodWhiteLily
-  description: entity-description-FoodWhiteLily
   components:
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/white_lily.rsi
@@ -3898,8 +3732,6 @@
 - type: entity
   parent: FoodProduceBase
   id: MobTomatoKisser
-  name: entity-name-MobTomatoKisser
-  description: entity-description-MobTomatoKisser
   components:
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/tomato.rsi
@@ -3913,8 +3745,6 @@
 - type: entity
   parent: FoodProduceBase
   id: MobTomatoKisserFake
-  name: entity-name-MobTomatoKisserFake
-  description: entity-description-MobTomatoKisserFake
   components:
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/tomato.rsi
@@ -3928,8 +3758,6 @@
 - type: entity
   parent: FoodProduceBase
   id: Rose
-  name: entity-name-Rose
-  description: entity-description-Rose
   components:
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/rose.rsi
@@ -3943,8 +3771,6 @@
 - type: entity
   parent: FoodProduceBase
   id: RoseBlack
-  name: entity-name-RoseBlack
-  description: entity-description-RoseBlack
   components:
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/blackRose.rsi
@@ -3958,8 +3784,6 @@
 - type: entity
   parent: FoodProduceBase
   id: HopTart
-  name: entity-name-HopTart
-  description: entity-description-HopTart
   components:
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/employedhops.rsi
@@ -3980,8 +3804,6 @@
 - type: entity
   parent: FoodProduceBase
   id: MaterialPom1
-  name: entity-name-MaterialPom1
-  description: entity-description-MaterialPom1
   components:
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/pompombush.rsi
@@ -3992,8 +3814,6 @@
 - type: entity
   parent: FoodProduceBase
   id: GoldLeaf
-  name: entity-name-GoldLeaf
-  description: entity-description-GoldLeaf
   components:
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/spesostree.rsi
@@ -4004,8 +3824,6 @@
 - type: entity
   parent: FoodProduceBase
   id: FoodCoffee
-  name: entity-name-FoodCoffee
-  description: entity-description-FoodCoffee
   components:
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/wheat.rsi
@@ -4026,8 +3844,6 @@
 - type: entity
   parent: FoodProduceBase
   id: NFFoodGlowshroom
-  name: entity-name-NFFoodGlowshroom
-  description: entity-description-NFFoodGlowshroom
   components:
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/towercap.rsi
@@ -4044,4 +3860,3 @@
   - type: Tag
     tags:
     - Food
-

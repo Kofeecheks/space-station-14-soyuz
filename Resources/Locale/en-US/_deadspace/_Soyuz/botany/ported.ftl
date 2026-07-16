@@ -1,4 +1,9 @@
 # Consolidated English localization for imported Soyuz botany.
+flavor-complex-spices = like spices
+reagent-name-everyspice = everyspice
+reagent-desc-everyspice = A versatile flavoring, this spice has a flavor for every occasion.
+food-sequence-content-everyspice = everyspice
+
 seeds-lemo-name = lemo fruit
 seeds-lemo-display-name = lemo tree
 seeds-green-marijuana-name = green marijuana

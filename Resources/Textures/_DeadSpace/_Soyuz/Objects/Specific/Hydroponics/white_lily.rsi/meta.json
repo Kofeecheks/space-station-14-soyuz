@@ -31,6 +31,12 @@
         {
             "name": "equipped-HELMET",
             "directions": 4
+        },
+        {
+            "name": "inhand-left"
+        },
+        {
+            "name": "inhand-right"
         }
     ]
 }

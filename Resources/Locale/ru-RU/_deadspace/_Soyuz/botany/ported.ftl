@@ -2,6 +2,11 @@
 # Названия и описания переведены вручную с учётом игрового контекста.
 
 # Названия культур
+flavor-complex-spices = как пряности
+reagent-name-everyspice = всепряность
+reagent-desc-everyspice = Универсальная приправа на любой случай.
+food-sequence-content-everyspice = всепряность
+
 seeds-lemo-name = лемо
 seeds-lemo-display-name = дерево лемо
 seeds-green-marijuana-name = зелёная марихуана

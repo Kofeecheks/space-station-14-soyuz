@@ -2,6 +2,44 @@
 # All prototype logic and text are locally rewritten; each RSI keeps its own
 # license metadata. No AGPL C# implementation was imported.
 
+- type: flavor
+  id: spices
+  flavorType: Complex
+  description: flavor-complex-spices
+
+- type: reagent
+  id: Everyspice
+  name: reagent-name-everyspice
+  group: Foods
+  desc: reagent-desc-everyspice
+  physicalDesc: reagent-physical-desc-powdery
+  flavor: spices
+  flavorMinimum: 0.05
+  color: "#7a481f"
+  recognizable: true
+
+- type: constructionGraph
+  id: Everyspice
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: FoodEveryspiceRoasted
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 365
+  - node: FoodEveryspiceRoasted
+    entity: FoodEveryspiceRoasted
+
+- type: foodSequenceElement
+  id: Everyspice
+  scale: 0.8, 0.8
+  name: food-sequence-content-everyspice
+  sprites:
+  - sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/everyspice.rsi
+    state: produce
 
 - type: entity
   name: entity-name-FoodLemo

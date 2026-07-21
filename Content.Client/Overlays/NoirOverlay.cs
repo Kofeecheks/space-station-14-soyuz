@@ -1,6 +1,6 @@
 using Content.Client.DeadSpace._Soyuz.Overlays;
 using Robust.Client.Graphics;
-using Robust.Client.Player;
+using Robust.Client.Player; // DS14-Soyuz
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 
@@ -11,7 +11,7 @@ public sealed partial class NoirOverlay : Overlay
     private static readonly ProtoId<ShaderPrototype> Shader = "Noir";
 
     [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!; // DS14-Soyuz
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
@@ -25,9 +25,8 @@ public sealed partial class NoirOverlay : Overlay
         ZIndex = 9; // draw this over the DamageOverlay, RainbowOverlay etc, but before the black and white shader
     }
 
-    protected override bool BeforeDraw(in OverlayDrawArgs args)
+    protected override bool BeforeDraw(in OverlayDrawArgs args) // DS14-Soyuz
     {
-        // DS-14 Soyuz
         return SoyuzOverlayViewport.IsPrimary(args, _entityManager, _playerManager);
     }
 

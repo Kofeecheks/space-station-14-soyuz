@@ -46,7 +46,7 @@ public sealed class RCDSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TagSystem _tags = default!;
-    [Dependency] private readonly TileCenterCollisionSystem _tileCenterCollision = default!;
+    [Dependency] private readonly TileCenterCollisionSystem _tileCenterCollision = default!; // DS14-Soyuz
 
     private readonly int _instantConstructionDelay = 0;
     private readonly EntProtoId _instantConstructionFx = "EffectRCDConstruct0";
@@ -545,20 +545,16 @@ public sealed class RCDSystem : EntitySystem
                     if (!fixture.Hard || fixture.CollisionLayer <= 0 || (fixture.CollisionLayer & (int)prototype.CollisionMask) == 0)
                         continue;
 
-                    if (prototype.CollisionPolygon != null)
-                    {
-                        if (!DoesCustomBoundsIntersectWithFixture(prototype.CollisionPolygon, component.ConstructionTransform, ent, fixture))
-                            continue;
-                    }
-                    // DS-14 Soyuz
-                    else if (!_tileCenterCollision.FixtureContainsTileCenter(
-                                 (gridUid, mapGrid),
-                                 position,
-                                 ent,
-                                 fixture))
-                    {
+                    var intersects = prototype.CollisionPolygon != null
+                        ? DoesCustomBoundsIntersectWithFixture(prototype.CollisionPolygon, component.ConstructionTransform, ent, fixture)
+                        : _tileCenterCollision.FixtureContainsTileCenter(
+                            (gridUid, mapGrid),
+                            position,
+                            ent,
+                            fixture);
+
+                    if (!intersects)
                         continue;
-                    }
 
                     // Collision was detected
                     if (popMsgs)

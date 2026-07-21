@@ -130,7 +130,7 @@ namespace Content.Shared.Atmos
                 throw new ArgumentException($"Invalid quantity \"{quantity}\" specified!", nameof(quantity));
 
             if (Immutable)
-                return;
+                return; // DS14-Soyuz
 
             Moles[gasId] = quantity;
             // DS-14 Soyuz

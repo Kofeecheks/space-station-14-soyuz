@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
+using System.Text.RegularExpressions; // DS14-Soyuz
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
@@ -17,7 +17,7 @@ using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Humanoid;
+using Content.Shared.Humanoid; // DS14-Soyuz
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Players;
 using Content.Shared.Players.RateLimiting;
@@ -63,7 +63,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly StationSystem _stationSystem = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPoliticalLoudspeakerSystem _politicalLoudspeaker = default!;
+    [Dependency] private readonly SharedPoliticalLoudspeakerSystem _politicalLoudspeaker = default!; // DS14-Soyuz
     [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
     [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
     [Dependency] private readonly LanguageSystem _language = default!; // DS14-Languages
@@ -924,7 +924,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     {
         var totalWrappedMessage = wrappedMessage;
         var totalMessage = message;
-        var voiceRange = (float) VoiceRange;
+        var voiceRange = (float) VoiceRange; // DS14-Soyuz
 
         // Kofeecheks political loudspeaker range integration: LicenseRef-Kofeecheks
         if (channel == ChatChannel.Local)
@@ -1068,18 +1068,18 @@ public sealed partial class ChatSystem : SharedChatSystem
         RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
     private const string YoungImbaBypassSuffix = "soyuzyoungimbabypass";
 
-    public string SanitizeMessageReplaceWords(EntityUid source, string message)
+    public string SanitizeMessageReplaceWords(EntityUid source, string message) // DS14-Soyuz
     {
         if (string.IsNullOrEmpty(message)) return message;
 
         var protectYoungImba = TryComp<HumanoidAppearanceComponent>(source, out var humanoid) && humanoid.Age < 25;
         var msg = protectYoungImba
             ? YoungImbaRegex.Replace(message, match => match.Value + YoungImbaBypassSuffix)
-            : message;
+            : message; // DS14-Soyuz
 
         msg = _wordreplacement.ApplyReplacements(msg, ChatSanitize_Accent);
 
-        return protectYoungImba ? msg.Replace(YoungImbaBypassSuffix, string.Empty) : msg;
+        return protectYoungImba ? msg.Replace(YoungImbaBypassSuffix, string.Empty) : msg; // DS14-Soyuz
     }
 
     /// <summary>

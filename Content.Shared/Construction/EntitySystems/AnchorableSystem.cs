@@ -34,7 +34,7 @@ public sealed partial class AnchorableSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly TileCenterCollisionSystem _tileCenterCollision = default!;
+    [Dependency] private readonly TileCenterCollisionSystem _tileCenterCollision = default!; // DS14-Soyuz
 
     public readonly ProtoId<TagPrototype> Unstackable = "Unstackable";
 

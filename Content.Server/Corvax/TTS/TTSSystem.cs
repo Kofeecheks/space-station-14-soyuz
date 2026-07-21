@@ -26,7 +26,7 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private readonly TTSManager _ttsManager = default!;
     [Dependency] private readonly IRobustRandom _rng = default!;
     [Dependency] private readonly LanguageSystem _language = default!;
-    [Dependency] private readonly SharedPoliticalLoudspeakerSystem _politicalLoudspeaker = default!;
+    [Dependency] private readonly SharedPoliticalLoudspeakerSystem _politicalLoudspeaker = default!; // DS14-Soyuz
 
     private readonly List<string> _sampleText =
         new()
@@ -195,17 +195,17 @@ public sealed partial class TTSSystem : EntitySystem
                         isSoundLexicon: true,
                         languageId: languageId,
                         volumeMultiplier: ttsVolumeMultiplier,
-                        distanceMultiplier: speechRangeMultiplier), session);
+                        distanceMultiplier: speechRangeMultiplier), session); // DS14-Soyuz
                 else
                     RaiseNetworkEvent(new PlayTTSEvent(soundLexiconData, GetNetEntity(uid),
                         volumeMultiplier: ttsVolumeMultiplier,
-                        distanceMultiplier: speechRangeMultiplier), session);
+                        distanceMultiplier: speechRangeMultiplier), session); // DS14-Soyuz
             }
             else
                 RaiseNetworkEvent(new PlayTTSEvent(soundData, GetNetEntity(uid),
                     isSoundLexicon: false,
                     volumeMultiplier: ttsVolumeMultiplier,
-                    distanceMultiplier: speechRangeMultiplier), session);
+                    distanceMultiplier: speechRangeMultiplier), session); // DS14-Soyuz
         }
 
     }
@@ -362,7 +362,7 @@ public sealed partial class TTSSystem : EntitySystem
         if (char.IsLetter(textSanitized[^1]))
             textSanitized += ".";
 
-        var textSsml = ToSsmlText(textSanitized, intonation.Style, isWhisper);
+        var textSsml = ToSsmlText(textSanitized, intonation.Style, isWhisper); // DS14-Soyuz
 
         return await _ttsManager.ConvertTextToSpeech(speaker, textSsml);
     }

@@ -15,7 +15,7 @@ namespace Content.Shared.Tools.Systems;
 public abstract partial class SharedToolSystem
 {
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly TileCenterCollisionSystem _tileCenterCollision = default!;
+    [Dependency] private readonly TileCenterCollisionSystem _tileCenterCollision = default!; // DS14-Soyuz
 
     public void InitializeTile()
     {

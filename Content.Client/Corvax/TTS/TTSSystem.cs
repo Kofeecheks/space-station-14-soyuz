@@ -123,7 +123,7 @@ public sealed class TTSSystem : EntitySystem
         // Kofeecheks political loudspeaker TTS integration: LicenseRef-Kofeecheks
         var audioParams = AudioParams.Default
             .WithVolume(AdjustVolume(ev.IsWhisper, ev.IsRadio, ev.VolumeMultiplier))
-            .WithMaxDistance(AdjustDistance(ev.IsWhisper, ev.DistanceMultiplier));
+            .WithMaxDistance(AdjustDistance(ev.IsWhisper, ev.DistanceMultiplier)); // DS14-Soyuz
 
         // Если есть обычные данные TTS — готовим ресурс
         if (hasData)
@@ -174,7 +174,7 @@ public sealed class TTSSystem : EntitySystem
             volume = MinimalVolume + SharedAudioSystem.GainToVolume(_volumeRadio);
         }
 
-        if (!isRadio && volumeMultiplier > 1f)
+        if (!isRadio && volumeMultiplier > 1f) // DS14-Soyuz
             volume += SharedAudioSystem.GainToVolume(volumeMultiplier);
 
         return volume;

@@ -27,7 +27,7 @@ namespace Content.Server.Bible
         [Dependency] private readonly ActionBlockerSystem _blocker = default!;
         [Dependency] private readonly DamageableSystem _damageableSystem = default!;
         [Dependency] private readonly InventorySystem _invSystem = default!;
-        [Dependency] private readonly BibleRevivalSystem _revival = default!;
+        [Dependency] private readonly BibleRevivalSystem _revival = default!; // DS14-Soyuz
         [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
         [Dependency] private readonly PopupSystem _popupSystem = default!;
         [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
@@ -100,7 +100,7 @@ namespace Content.Server.Bible
             if (!TryComp(uid, out UseDelayComponent? useDelay) || _delay.IsDelayed((uid, useDelay)))
                 return;
 
-            if (args.Target == null || args.Target == args.User)
+            if (args.Target == null || args.Target == args.User) // DS14-Soyuz
                 return;
 
             // DS-14 Soyuz
@@ -110,7 +110,7 @@ namespace Content.Server.Bible
                 return;
             }
 
-            if (!_mobStateSystem.IsAlive(args.Target.Value))
+            if (!_mobStateSystem.IsAlive(args.Target.Value)) // DS14-Soyuz
                 return;
 
             if (!HasComp<BibleUserComponent>(args.User))

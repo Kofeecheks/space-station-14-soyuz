@@ -56,9 +56,8 @@ public sealed class DoAfterOverlay : Overlay
         _unshadedShader = protoManager.Index(UnshadedShader).Instance();
     }
 
-    protected override bool BeforeDraw(in OverlayDrawArgs args)
+    protected override bool BeforeDraw(in OverlayDrawArgs args) // DS14-Soyuz
     {
-        // DS-14 Soyuz
         return SoyuzOverlayViewport.IsPrimary(args, _entManager, _player);
     }
 

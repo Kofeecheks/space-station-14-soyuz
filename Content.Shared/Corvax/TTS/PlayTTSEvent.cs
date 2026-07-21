@@ -34,6 +34,6 @@ public sealed class PlayTTSEvent : EntityEventArgs
         IsLexiconSound = isSoundLexicon; // DS14-Language
         LanguageId = languageId; // DS14-Language
         VolumeMultiplier = volumeMultiplier;
-        DistanceMultiplier = distanceMultiplier;
+        DistanceMultiplier = distanceMultiplier; // DS14-Soyuz
     }
 }

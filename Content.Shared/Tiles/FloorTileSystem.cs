@@ -36,7 +36,7 @@ public sealed class FloorTileSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly TileCenterCollisionSystem _tileCenterCollision = default!;
+    [Dependency] private readonly TileCenterCollisionSystem _tileCenterCollision = default!; // DS14-Soyuz
 
     private static readonly Vector2 CheckRange = new(1f, 1f);
 

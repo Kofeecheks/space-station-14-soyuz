@@ -83,6 +83,9 @@ public sealed class MutationSystem : EntitySystem
 
         CrossBool(ref result.Seedless, a.Seedless);
         CrossBool(ref result.Ligneous, a.Ligneous);
+        CrossBool(ref result.PreventSwabbing, a.PreventSwabbing);
+        CrossBool(ref result.PreventClipping, a.PreventClipping);
+        CrossBool(ref result.PermanentlySeedless, a.PermanentlySeedless);
         CrossBool(ref result.TurnIntoKudzu, a.TurnIntoKudzu);
         CrossBool(ref result.CanScream, a.CanScream);
 

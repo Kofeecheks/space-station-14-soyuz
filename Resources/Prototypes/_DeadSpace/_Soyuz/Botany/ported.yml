@@ -2,6 +2,41 @@
 # All prototype logic and text are locally rewritten; each RSI keeps its own
 # license metadata. No AGPL C# implementation was imported.
 
+- type: entity
+  parent: BaseHandheldComputer
+  id: SoyuzPlantAnalyzer
+  name: entity-name-SoyuzPlantAnalyzer
+  description: Переносной прибор для анализа растений и семян.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Medical/healthanalyzer.rsi
+    state: icon
+  - type: Item
+    storedRotation: -90
+  - type: ActivatableUI
+    key: enum.SoyuzPlantAnalyzerUiKey.Key
+    inHandsOnly: true
+  - type: UserInterface
+    interfaces:
+      enum.SoyuzPlantAnalyzerUiKey.Key:
+        type: SoyuzPlantAnalyzerBoundUserInterface
+  - type: SoyuzPlantAnalyzer
+    scanDelay: 0.5
+    advancedScanDelay: 1
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: SoyuzPlantAnalyzer
+  result: SoyuzPlantAnalyzer
+  categories:
+  - Tools
+  completetime: 3
+  materials:
+    Steel: 500
+    Glass: 500
+    Plastic: 100
+    Gold: 100
+
 - type: flavor
   id: spices
   flavorType: Complex
@@ -893,6 +928,7 @@
   name: seeds-green-marijuana-name
   noun: seeds-noun-seeds
   displayName: seeds-green-marijuana-display-name
+  singularPlural: true
   plantRsi: Objects/Specific/Hydroponics/cannabis.rsi
   packetPrototype: GreenMarijuanaSeeds
   productPrototypes:
@@ -1887,6 +1923,7 @@
   name: seeds-coffee-name
   noun: seeds-noun-seeds
   displayName: seeds-coffee-display-name
+  plural: true
   plantRsi: Objects/Specific/Hydroponics/wheat.rsi
   packetPrototype: CoffeeSeeds
   productPrototypes:
@@ -1968,6 +2005,7 @@
   name: seeds-bees-name
   noun: seeds-noun-nothing
   displayName: seeds-bees-display-name
+  preventSwabbing: true
   plantRsi: Objects/Specific/Hydroponics/tomato.rsi
   packetPrototype: BeeSeeds
   productPrototypes:

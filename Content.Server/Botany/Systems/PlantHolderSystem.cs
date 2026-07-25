@@ -274,6 +274,12 @@ public sealed class PlantHolderSystem : EntitySystem
                 return;
             }
 
+            if (component.Seed.PreventClipping)
+            {
+                _popup.PopupCursor(Loc.GetString("plant-holder-component-cannot-be-sampled-message"), args.User);
+                return;
+            }
+
             if (component.Sampled)
             {
                 _popup.PopupCursor(Loc.GetString("plant-holder-component-already-sampled-message"), args.User);

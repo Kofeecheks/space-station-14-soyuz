@@ -95,6 +95,12 @@ public partial class SeedData
     public string Name { get; private set; } = "";
 
     /// <summary>
+    ///     Localization key used when creating a packet of this seed.
+    /// </summary>
+    [DataField("packetName")]
+    public string PacketName { get; private set; } = "botany-seed-packet-name";
+
+    /// <summary>
     ///     The noun for this type of seeds. E.g. for fungi this should probably be "spores" instead of "seeds". Also
     ///     used to determine the name of seed packets.
     /// </summary>
@@ -106,6 +112,12 @@ public partial class SeedData
     /// </summary>
     [DataField("displayName")]
     public string DisplayName { get; private set; } = "";
+
+    [DataField("plural")]
+    public bool IsPluralName;
+
+    [DataField("singularPlural")]
+    public bool IsSingularPluralName;
 
     [DataField("mysterious")] public bool Mysterious;
 
@@ -197,6 +209,12 @@ public partial class SeedData
     /// </summary>
     [DataField] public bool Ligneous;
 
+    [DataField] public bool PreventSwabbing;
+
+    [DataField] public bool PreventClipping;
+
+    [DataField] public bool PermanentlySeedless;
+
     // No, I'm not removing these.
     // if you re-add these, make sure that they get cloned.
     //public PlantSpread Spread { get; set; }
@@ -264,8 +282,11 @@ public partial class SeedData
         var newSeed = new SeedData
         {
             Name = Name,
+            PacketName = PacketName,
             Noun = Noun,
             DisplayName = DisplayName,
+            IsPluralName = IsPluralName,
+            IsSingularPluralName = IsSingularPluralName,
             Mysterious = Mysterious,
 
             PacketPrototype = PacketPrototype,
@@ -299,6 +320,9 @@ public partial class SeedData
             Seedless = Seedless,
             Viable = Viable,
             Ligneous = Ligneous,
+            PreventSwabbing = PreventSwabbing,
+            PreventClipping = PreventClipping,
+            PermanentlySeedless = PermanentlySeedless,
 
             PlantRsi = PlantRsi,
             PlantIconState = PlantIconState,
@@ -324,8 +348,11 @@ public partial class SeedData
         var newSeed = new SeedData
         {
             Name = other.Name,
+            PacketName = other.PacketName,
             Noun = other.Noun,
             DisplayName = other.DisplayName,
+            IsPluralName = other.IsPluralName,
+            IsSingularPluralName = other.IsSingularPluralName,
             Mysterious = other.Mysterious,
 
             PacketPrototype = other.PacketPrototype,
@@ -362,6 +389,9 @@ public partial class SeedData
             Seedless = Seedless,
             Viable = Viable,
             Ligneous = Ligneous,
+            PreventSwabbing = other.PreventSwabbing,
+            PreventClipping = other.PreventClipping,
+            PermanentlySeedless = other.PermanentlySeedless,
 
             PlantRsi = other.PlantRsi,
             PlantIconState = other.PlantIconState,

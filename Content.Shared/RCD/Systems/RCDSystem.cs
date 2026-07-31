@@ -2,6 +2,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Construction;
 using Content.Shared.Database;
+using Content.Shared.DeadSpace._Soyuz.Construction;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
@@ -45,6 +46,7 @@ public sealed class RCDSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TagSystem _tags = default!;
+    [Dependency] private readonly TileCenterCollisionSystem _tileCenterCollision = default!; // DS14-Soyuz
 
     private readonly int _instantConstructionDelay = 0;
     private readonly EntProtoId _instantConstructionFx = "EffectRCDConstruct0";
@@ -253,8 +255,9 @@ public sealed class RCDSystem : EntitySystem
         if (HasComp<RCDDeconstructableComponent>(target.Value))
             return target;
 
-        if (TryComp<PhysicsComponent>(target.Value, out var physics) && physics.CanCollide)
-            return target;
+        // Kofeecheks RCD target normalization: LicenseRef-Kofeecheks
+        if (TryComp<PhysicsComponent>(target.Value, out var physics))
+            return physics.CanCollide ? target : null;
 
         if (TryComp<FixturesComponent>(target.Value, out var fixtures))
         {
@@ -542,9 +545,15 @@ public sealed class RCDSystem : EntitySystem
                     if (!fixture.Hard || fixture.CollisionLayer <= 0 || (fixture.CollisionLayer & (int)prototype.CollisionMask) == 0)
                         continue;
 
-                    // Continue if our custom collision bounds are not intersected
-                    if (prototype.CollisionPolygon != null &&
-                        !DoesCustomBoundsIntersectWithFixture(prototype.CollisionPolygon, component.ConstructionTransform, ent, fixture))
+                    var intersects = prototype.CollisionPolygon != null
+                        ? DoesCustomBoundsIntersectWithFixture(prototype.CollisionPolygon, component.ConstructionTransform, ent, fixture)
+                        : _tileCenterCollision.FixtureContainsTileCenter(
+                            (gridUid, mapGrid),
+                            position,
+                            ent,
+                            fixture);
+
+                    if (!intersects)
                         continue;
 
                     // Collision was detected
@@ -574,7 +583,12 @@ public sealed class RCDSystem : EntitySystem
             }
 
             // The tile has a structure sitting on it
-            if (_turf.IsTileBlocked(tile, CollisionGroup.MobMask))
+            // DS-14 Soyuz
+            if (TryComp<MapGridComponent>(tile.GridUid, out var grid) &&
+                _tileCenterCollision.IsBlocked(
+                    (tile.GridUid, grid),
+                    tile.GridIndices,
+                    collisionMask: (int) CollisionGroup.Impassable))
             {
                 if (popMsgs)
                     _popup.PopupClient(Loc.GetString("rcd-component-tile-obstructed-message"), uid, user);

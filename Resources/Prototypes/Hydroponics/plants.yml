@@ -52,9 +52,12 @@
   - type: PlantData
     # DS14-Soyuz start: directed species mutations
     mutations:
-    - target: AgentgrainPlants
-      chance: 0.1
+    - target: MeatWheatPlants
+      chance: 0.04
       weight: 100
+      requirements:
+        minPotency: 70
+        minGeneticInstability: 40
     # DS14-Soyuz end
     name: seeds-wheat-name
     packetPrototype: WheatSeeds

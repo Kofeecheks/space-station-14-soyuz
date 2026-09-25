@@ -1,0 +1,187 @@
+# SPDX-FileCopyrightText: 2026 Kofeecheks
+# SPDX-License-Identifier: LicenseRef-Kofeecheks
+# DS14-Soyuz: reagents used by the restored botanical produce.
+
+- type: Tag
+  id: SoyuzButterfly
+
+- type: entity
+  parent: MobButterfly
+  id: SoyuzButterfly
+  components:
+  - type: Tag
+    tags:
+    - SoyuzButterfly
+
+- type: reagent
+  id: SoyuzButterflyNectar
+  name: reagent-name-soyuz-butterfly-nectar
+  group: Toxins
+  desc: reagent-desc-soyuz-butterfly-nectar
+  physicalDesc: reagent-physical-desc-reallynervous
+  flavor: sweet
+  color: "#f8eb73"
+  tileReactions:
+  - !type:CreateEntityTileReaction
+    entity: SoyuzButterfly
+    usage: 3
+    maxOnTile: 3
+    randomOffsetMax: 0.3
+    maxOnTileWhitelist:
+      tags: [ SoyuzButterfly ]
+  metabolisms:
+    Poison:
+      effects:
+      - !type:PopupMessage
+        type: Local
+        messages:
+        - butterflies-effect-stomach
+        - butterflies-effect-looks
+        - butterflies-effect-heart
+        - butterflies-effect-exciting
+        - butterflies-effect-hands
+        - butterflies-effect-chaos
+        - butterflies-effect-chaos-two
+        - butterflies-effect-chaos-three
+        probability: 0.1
+
+- type: reagent
+  id: SoyuzPrimateExtract
+  name: reagent-name-soyuz-primate-extract
+  desc: reagent-desc-soyuz-primate-extract
+  flavor: hairy
+  physicalDesc: reagent-physical-desc-thick
+  color: "#7c3d00"
+  metabolisms:
+    Drink:
+      metabolismRate: 0.25
+      effects:
+      - !type:Emote
+        emote: MonkeyScreeches
+        showInChat: true
+        force: true
+        probability: 0.18
+      - !type:Polymorph
+        prototype: ArtifactMonkey
+        conditions:
+        - !type:ReagentCondition
+          reagent: SoyuzPrimateExtract
+          min: 50
+      - !type:AdjustReagent
+        reagent: SoyuzPrimateExtract
+        amount: -20
+        conditions:
+        - !type:ReagentCondition
+          reagent: SoyuzPrimateExtract
+          min: 50
+
+- type: reagent
+  id: SoyuzSpectralEssence
+  name: reagent-name-soyuz-spectral-essence
+  group: Toxins
+  desc: reagent-desc-soyuz-spectral-essence
+  flavor: spooky
+  color: "#61a79d"
+  physicalDesc: reagent-physical-desc-translucent
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:HealthChange
+        probability: 0.4
+        damage:
+          types:
+            Poison: 2
+
+- type: reagent
+  id: SoyuzResinferaSerum
+  name: reagent-name-soyuz-resinfera-serum
+  group: Medicine
+  desc: reagent-desc-soyuz-resinfera-serum
+  physicalDesc: reagent-physical-desc-resinfera
+  flavor: medicine
+  color: "#99ff33"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Piercing: -1
+
+- type: reagent
+  id: SoyuzArabicaCoffee
+  name: reagent-name-soyuz-arabica-coffee
+  parent: BaseDrink
+  desc: reagent-desc-soyuz-arabica-coffee
+  physicalDesc: reagent-physical-desc-aromatic
+  flavor: coffee
+  color: "#664300"
+  recognizable: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:Satiate
+        satiationType: Thirst
+        factor: 2
+      - !type:GenericStatusEffect
+        key: Drowsiness
+        time: 2.0
+        type: Remove
+      - !type:AdjustReagent
+        reagent: Theobromine
+        amount: 0.05
+
+- type: reagent
+  id: SoyuzRobustaCoffee
+  parent: SoyuzArabicaCoffee
+  name: reagent-name-soyuz-robusta-coffee
+  desc: reagent-desc-soyuz-robusta-coffee
+
+- type: reagent
+  id: SoyuzLanternPowder
+  name: reagent-name-soyuz-lantern-powder
+  group: Botanical
+  desc: reagent-desc-soyuz-lantern-powder
+  physicalDesc: reagent-physical-desc-pulverizedlantern
+  flavor: medicine
+  color: "#FFCA86"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 1
+
+- type: reagent
+  id: SoyuzCucumberWater
+  name: reagent-name-soyuz-cucumber-water
+  parent: BaseDrink
+  desc: reagent-desc-soyuz-cucumber-water
+  physicalDesc: reagent-physical-desc-aromatic
+  flavor: cucumber
+  color: "#b1ceb0"
+  metabolisms:
+    Drink:
+      effects:
+      - !type:Satiate
+        satiationType: Thirst
+        factor: 6
+
+- type: reagent
+  id: SoyuzMangoJuice
+  name: reagent-name-soyuz-mango-juice
+  parent: BaseJuice
+  desc: reagent-desc-soyuz-mango-juice
+  physicalDesc: reagent-physical-desc-citric
+  flavor: fruity
+  color: "#FFBF34"
+
+- type: reagent
+  id: SoyuzRoseJuice
+  name: reagent-name-soyuz-rose-juice
+  parent: BaseJuice
+  desc: reagent-desc-soyuz-rose-juice
+  physicalDesc: reagent-physical-desc-fragrant
+  flavor: SoyuzRosePetalFlavor
+  color: "#C95E7A"

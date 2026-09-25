@@ -60,6 +60,26 @@
   description: flavor-complex-cucumber
 
 - type: flavor
+  id: SoyuzArabicaFlavor
+  flavorType: Complex
+  description: flavor-complex-soyuz-arabica
+
+- type: flavor
+  id: SoyuzRobustaFlavor
+  flavorType: Complex
+  description: flavor-complex-soyuz-robusta
+
+- type: flavor
+  id: SoyuzRosePetalFlavor
+  flavorType: Complex
+  description: flavor-complex-soyuz-rose-petal
+
+- type: flavor
+  id: SoyuzLilyPetalFlavor
+  flavorType: Complex
+  description: flavor-complex-soyuz-lily-petal
+
+- type: flavor
   id: hairy
   flavorType: Complex
   description: flavor-complex-hairy
@@ -636,7 +656,7 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 5
-        - ReagentId: Vitamin
+        - ReagentId: SoyuzButterflyNectar
           Quantity: 5
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/butterfly_orchid.rsi
@@ -646,7 +666,7 @@
   - type: Extractable
     juiceSolution:
       reagents:
-      - ReagentId: Vitamin
+      - ReagentId: SoyuzButterflyNectar
         Quantity: 15
   - type: Tag
     tags:
@@ -850,24 +870,6 @@
 
 - type: entity
   parent: SeedBase
-  id: HoPsSeeds # really riding on yaml being case sensitive here
-  components:
-  - type: Seed
-    plantId: EmployedhopsPlants
-  - type: Sprite
-    sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/employedhops.rsi
-
-- type: entity
-  parent: SeedBase
-  id: AgentGrainSeeds
-  components:
-  - type: Seed
-    plantId: AgentgrainPlants
-  - type: Sprite
-    sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/agentgrain.rsi
-
-- type: entity
-  parent: SeedBase
   id: ButterflyOrchidSeeds
   components:
     - type: Seed
@@ -1002,7 +1004,7 @@
     grindableSolutionName: food
     juiceSolution:
       reagents:
-      - ReagentId: Water
+      - ReagentId: SoyuzCucumberWater
         Quantity: 10
   - type: Tag
     tags:
@@ -1217,7 +1219,7 @@
       food:
         maxVol: 25
         reagents:
-        - ReagentId: Vitamin
+        - ReagentId: SoyuzPrimateExtract
           Quantity: 11
         - ReagentId: Nutriment
           Quantity: 5
@@ -1562,7 +1564,7 @@
           Quantity: 8
         - ReagentId: CapsaicinOil
           Quantity: 20
-        - ReagentId: Vitamin
+        - ReagentId: SoyuzSpectralEssence
           Quantity: 13
   - type: TileFrictionModifier
     modifier: 0.0001
@@ -1730,6 +1732,8 @@
   parent: FoodBlueTomato
   id: FoodBluespaceTomato
   components:
+  # DS14-Soyuz: eating scatters; a combat throw swaps and scatters its victim.
+  - type: SoyuzBluespaceTomato
   - type: SolutionContainerManager
     solutions:
       food:
@@ -1887,7 +1891,7 @@
         food:
           maxVol: 20
           reagents:
-            - ReagentId: Vitamin
+            - ReagentId: SoyuzResinferaSerum
               Quantity: 5
     - type: Sprite
       sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/resinfera.rsi
@@ -1981,7 +1985,7 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 4
-        - ReagentId: Vitamin
+        - ReagentId: SoyuzMangoJuice
           Quantity: 5
   - type: Sprite
     sprite: _DeadSpace/Objects/Specific/Hydroponics/mango.rsi
@@ -1992,7 +1996,7 @@
   - type: Extractable
     juiceSolution:
       reagents:
-      - ReagentId: Nutriment
+      - ReagentId: SoyuzMangoJuice
         Quantity: 10
   - type: Tag
     tags:
@@ -2162,6 +2166,9 @@
   parent: FoodProduceBase
   id: FoodCoffeeArabica
   components:
+  - type: FlavorProfile
+    flavors:
+    - SoyuzArabicaFlavor
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/wheat.rsi
     state: produce
@@ -2172,10 +2179,8 @@
       food:
         maxVol: 14
         reagents:
-        - ReagentId: Nutriment
-          Quantity: 8
-        - ReagentId: Vitamin
-          Quantity: 3
+        - ReagentId: SoyuzArabicaCoffee
+          Quantity: 1
   - type: Tag
     tags:
     - Fruit
@@ -2184,6 +2189,9 @@
   parent: FoodProduceBase
   id: FoodCoffeeRobust
   components:
+  - type: FlavorProfile
+    flavors:
+    - SoyuzRobustaFlavor
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/wheat.rsi
     state: produce
@@ -2194,10 +2202,10 @@
       food:
         maxVol: 14
         reagents:
-        - ReagentId: Nutriment
-          Quantity: 8
-        - ReagentId: Vitamin
-          Quantity: 3
+        - ReagentId: SoyuzRobustaCoffee
+          Quantity: 2
+        - ReagentId: Ephedrine
+          Quantity: 1
   - type: Tag
     tags:
     - Fruit
@@ -2206,6 +2214,13 @@
   parent: FoodProduceBase
   id: FoodGeranium
   components:
+  - type: Clothing
+    slots:
+    - HEAD
+    quickEquip: false
+  - type: FlavorProfile
+    flavors:
+    - medicine
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/geranium.rsi
     state: produce
@@ -2217,9 +2232,9 @@
         maxVol: 14
         reagents:
         - ReagentId: Nutriment
-          Quantity: 8
-        - ReagentId: Vitamin
-          Quantity: 3
+          Quantity: 2
+        - ReagentId: Lacerinol
+          Quantity: 12
   - type: Tag
     tags:
     - Fruit
@@ -2280,9 +2295,9 @@
       food:
         maxVol: 14
         reagents:
-        - ReagentId: Nutriment
+        - ReagentId: Omnizine
           Quantity: 8
-        - ReagentId: Vitamin
+        - ReagentId: THC
           Quantity: 3
   - type: Tag
     tags:
@@ -2292,6 +2307,11 @@
   parent: FoodProduceBase
   id: FoodBarrelmelon
   components:
+  - type: Item
+    size: Small
+  - type: FlavorProfile
+    flavors:
+    - watermelon
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/barrelmelon.rsi
     state: produce
@@ -2300,12 +2320,66 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 14
+        maxVol: 25
         reagents:
         - ReagentId: Nutriment
-          Quantity: 8
-        - ReagentId: Vitamin
+          Quantity: 10
+        - ReagentId: Moonshine
+          Quantity: 15
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Moonshine
+        Quantity: 20
+  - type: Damageable
+  - type: DamageOnHighSpeedImpact
+    minimumSpeed: 0.1
+    damage:
+      types:
+        Blunt: 1
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1
+      behaviors:
+      - !type:SpillBehavior
+        solution: food
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: SliceableFood
+    count: 5
+    slice: SoyuzBarrelmelonSlice
+  - type: Tag
+    tags:
+    - Fruit
+
+- type: entity
+  parent: ProduceSliceBase
+  id: SoyuzBarrelmelonSlice
+  components:
+  - type: Item
+    size: Tiny
+  - type: FlavorProfile
+    flavors:
+    - watermelon
+  - type: Sprite
+    sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/barrelmelon.rsi
+    state: slice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: Moonshine
           Quantity: 3
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Moonshine
+        Quantity: 4
   - type: Tag
     tags:
     - Fruit
@@ -2314,6 +2388,9 @@
   parent: FoodProduceBase
   id: FoodLanternfruit
   components:
+  - type: FlavorProfile
+    flavors:
+    - strange
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/lanternfruit.rsi
     state: produce
@@ -2328,12 +2405,14 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 14
+        maxVol: 20
         reagents:
-        - ReagentId: Nutriment
-          Quantity: 8
-        - ReagentId: Vitamin
-          Quantity: 3
+        - ReagentId: SoyuzLanternPowder
+          Quantity: 5
+        - ReagentId: Sulfur
+          Quantity: 10
+        - ReagentId: Licoxide
+          Quantity: 5
   - type: Tag
     tags:
     - Fruit
@@ -2342,6 +2421,9 @@
   parent: FoodProduceBase
   id: FoodRedrose
   components:
+  - type: FlavorProfile
+    flavors:
+    - SoyuzRosePetalFlavor
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/redrose.rsi
     state: produce
@@ -2364,6 +2446,12 @@
   parent: FoodProduceBase
   id: FoodSnapcorn
   components:
+  - type: FlavorProfile
+    flavors:
+    - corn
+  - type: Edible
+    trash:
+    - FoodCornTrash
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/snapcorn.rsi
     state: produce
@@ -2372,12 +2460,12 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 14
+        maxVol: 45
         reagents:
         - ReagentId: Nutriment
-          Quantity: 8
-        - ReagentId: Vitamin
-          Quantity: 3
+          Quantity: 35
+        - ReagentId: Water
+          Quantity: 10
   - type: Tag
     tags:
     - Fruit
@@ -2386,6 +2474,9 @@
   parent: FoodProduceBase
   id: FoodWhiterose
   components:
+  - type: FlavorProfile
+    flavors:
+    - SoyuzRosePetalFlavor
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/whiterose.rsi
     state: produce
@@ -2408,6 +2499,9 @@
   parent: FoodProduceBase
   id: FoodWhiteLily
   components:
+  - type: FlavorProfile
+    flavors:
+    - SoyuzLilyPetalFlavor
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/white_lily.rsi
     state: produce
@@ -2430,9 +2524,54 @@
   parent: FoodProduceBase
   id: Rose
   components:
+  - type: FlavorProfile
+    flavors:
+    - SoyuzRosePetalFlavor
+  # DS14-Soyuz: a picked rose is a wearable, throwable thorned flower.
+  - type: Clothing
+    sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/rose.rsi
+    slots:
+    - HEAD
+    - MASK
+  - type: Item
+    sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/rose.rsi
+    size: Small
+  - type: EmbeddableProjectile
+    minimumSpeed: 3
+    removalTime: 0.5
+  - type: ThrowingAngle
+    angle: 315
+  - type: LandAtCursor
+  - type: MeleeWeapon
+    wideAnimationRotation: -45
+    damage:
+      types:
+        Piercing: 2
+    angle: 0
+    animation: WeaponArcThrust
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 4
   - type: SolutionContainerManager
     solutions:
-      food: {}
+      food:
+        maxVol: 2
+  - type: MeleeChemicalInjector
+    solution: food
+  - type: InjectableSolution
+    solution: food
+  - type: SolutionInjectOnEmbed
+    transferAmount: 2
+    solution: food
+  - type: SolutionTransfer
+    maxTransferAmount: 2
+  - type: Extractable
+    grindableSolutionName: food
+    juiceSolution:
+      reagents:
+      - ReagentId: SoyuzRoseJuice
+        Quantity: 10
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/rose.rsi
     state: icon
@@ -2443,12 +2582,37 @@
     - Flower
 
 - type: entity
-  parent: FoodProduceBase
+  parent: Rose
   id: RoseBlack
   components:
+  - type: Clothing
+    sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/blackRose.rsi
+    slots:
+    - HEAD
+    - MASK
+  - type: Item
+    sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/blackRose.rsi
+    size: Small
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 5
+  - type: SoyuzRoseEmbedDamage
+    damage:
+      types:
+        Piercing: 1
+  - type: SolutionInjectOnEmbed
+    transferAmount: 4
+    solution: food
   - type: SolutionContainerManager
     solutions:
-      food: {}
+      food:
+        maxVol: 4
+        reagents:
+        - ReagentId: SulfuricAcid
+          Quantity: 1
+        - ReagentId: Razorium
+          Quantity: 1
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/blackRose.rsi
     state: icon
@@ -2457,28 +2621,6 @@
   - type: Tag
     tags:
     - Flower
-
-- type: entity
-  parent: FoodProduceBase
-  id: HopTart
-  components:
-  - type: Sprite
-    sprite: Objects/Misc/id_cards.rsi
-    layers:
-    - state: default
-    - state: idpassenger
-  - type: Produce
-    plantId: EmployedhopsPlants
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 8
-  - type: Tag
-    tags:
-    - Food
 
 - type: entity
   parent: FoodProduceBase
@@ -2517,6 +2659,12 @@
   parent: FoodProduceBase
   id: NFFoodGlowshroom
   components:
+  - type: FlavorProfile
+    flavors:
+    - mushroom
+  - type: StaticPrice
+    price: 20
+  - type: BadFood
   - type: Sprite
     sprite: _DeadSpace/_Soyuz/Objects/Specific/Hydroponics/glowshroom.rsi
     state: produce
@@ -2533,8 +2681,8 @@
       food:
         maxVol: 8
         reagents:
-        - ReagentId: Nutriment
-          Quantity: 5
+        - ReagentId: Radium
+          Quantity: 8
   - type: Tag
     tags:
     - Food
